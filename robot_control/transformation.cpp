@@ -47,6 +47,23 @@ Transformation::Transformation(double a, double alpha, double d, double theta){
 
 }
 
+Transformation Transformation::operator*(const Transformation& b){
+    Transformation t;
+
+    // Multiplying matrix firstMatrix and secondMatrix and storing in array mult.
+    for(int i = 0; i < 4; ++i)
+    {
+        for(int j = 0; j < 4; ++j)
+        {
+            for(int k=0; k<4; ++k)
+            {
+                t.T[i][j] += T[i][k] * b.T[k][j];
+            }
+        }
+    }
+    return t;
+}
+
 void Transformation::print()
 {
     cout.precision(2);
