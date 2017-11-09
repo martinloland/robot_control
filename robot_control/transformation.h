@@ -1,12 +1,6 @@
 #ifndef TRANSFORMATION_H
 #define TRANSFORMATION_H
 
-static struct coord3D{
-    double x;
-    double y;
-    double z;
-} coord3D_;
-
 class Transformation
 {
 public:
@@ -19,7 +13,6 @@ public:
     void identity();
     void zero();
     void replace(const Transformation& t);
-    coord3D coord();
 
     double x();
     double y();

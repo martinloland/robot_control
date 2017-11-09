@@ -18,7 +18,6 @@ public:
     Transformation T;
     void print_coord();
 
-
 private:
     int n_links = 0;
     vector<Link*> links;

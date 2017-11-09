@@ -15,14 +15,13 @@ void Robot::print(){
 
 void Robot::print_coord(){
     cout.precision(2);
-
-    cout << "(" << T.x() << "," << T.y() << "," << T.z() << ")" << endl;
+    cout << "(x,y,z) = ";
+    cout << "(" << T.x() << ", " << T.y() << ", " << T.z() << ")" << endl;
 }
 
 void Robot::addLink(Link* link){
     links.push_back(link);
     n_links += 1;
-    cout << "total links in robot: " << n_links << endl;
     update_T();
 }
 

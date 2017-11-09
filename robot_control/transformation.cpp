@@ -6,7 +6,6 @@ using namespace std;
 
 Transformation::Transformation()
 {
-    cout << "created undefined transformation\n";
     identity();
 }
 
@@ -14,21 +13,14 @@ Transformation::Transformation(double a, double alpha, double d, double theta){
     change(a, alpha, d, theta);
 }
 
-coord3D Transformation::coord(){
-    coord3D_.x = T[1][4];
-    coord3D_.x = T[2][4];
-    coord3D_.x = T[3][4];
-    return coord3D_;
-}
-
 double Transformation::x(){
-    return T[1][4];
+    return T[0][3];
 }
 double Transformation::y(){
-    return T[2][4];
+    return T[1][3];
 }
 double Transformation::z(){
-    return T[3][4];
+    return T[2][3];
 }
 
 void Transformation::identity(){
