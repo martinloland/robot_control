@@ -7,9 +7,55 @@ using namespace std;
 Transformation::Transformation()
 {
     cout << "created undefined transformation\n";
+    identity();
 }
 
 Transformation::Transformation(double a, double alpha, double d, double theta){
+    change(a, alpha, d, theta);
+}
+
+coord3D Transformation::coord(){
+    coord3D_.x = T[1][4];
+    coord3D_.x = T[2][4];
+    coord3D_.x = T[3][4];
+    return coord3D_;
+}
+
+double Transformation::x(){
+    return T[1][4];
+}
+double Transformation::y(){
+    return T[2][4];
+}
+double Transformation::z(){
+    return T[3][4];
+}
+
+void Transformation::identity(){
+    for(int i = 0; i < 4; ++i)
+    {
+        for(int j = 0; j < 4; ++j)
+        {
+            if (i==j){
+                T[i][j] = 1.0;
+            }else{
+                T[i][j] = 0.0;
+            }
+        }
+    }
+}
+
+void Transformation::zero(){
+    for(int i = 0; i < 4; ++i)
+    {
+        for(int j = 0; j < 4; ++j)
+        {
+            T[i][j] = 0.0;
+        }
+    }
+}
+
+void Transformation::change(double a, double alpha, double d, double theta){
     double a11 = cos(theta);
     double a12 = -sin(theta)*cos(alpha);
     double a13 = sin(theta)*sin(alpha);
@@ -44,7 +90,6 @@ Transformation::Transformation(double a, double alpha, double d, double theta){
             pos++;
         }
     }
-
 }
 
 Transformation Transformation::operator*(const Transformation& b){
@@ -62,6 +107,32 @@ Transformation Transformation::operator*(const Transformation& b){
         }
     }
     return t;
+}
+
+void Transformation::operator*=(const Transformation& b){
+    Transformation t;
+    t.zero();
+    for(int i = 0; i < 4; ++i)
+    {
+        for(int j = 0; j < 4; ++j)
+        {
+            for(int k=0; k<4; ++k)
+            {
+                t.T[i][j] += this->T[i][k] * b.T[k][j];
+            }
+        }
+    }
+    replace(t);
+}
+
+void Transformation::replace(const Transformation& t){
+    for(int i = 0; i < 4; ++i)
+    {
+        for(int j = 0; j < 4; ++j)
+        {
+            this->T[i][j] = t.T[i][j];
+        }
+    }
 }
 
 void Transformation::print()

@@ -6,9 +6,10 @@ class Link
 {
 public:
 
+    Transformation A;
     Link();
     Link(double a, double alpha, double d, double theta);
-    Transformation A;
+    void print();
 
 private:
     // DH parameters
