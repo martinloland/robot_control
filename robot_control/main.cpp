@@ -1,4 +1,6 @@
 #include <QCoreApplication>
+#include "window.h"
+#include <QApplication>
 #include <iostream>
 #include "link.h"
 #include "robot.h"
@@ -8,7 +10,10 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+//    QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
+    window w;
+    w.show();
 
     Robot robot;
     Link link1(1.2, 0, 0, 3.14/8);
