@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     robot.cpp \
     link.cpp \
     transformation.cpp \
-    window.cpp
+    window.cpp \
+    renderarea.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -32,7 +33,8 @@ HEADERS += \
     robot.h \
     link.h \
     transformation.h \
-    window.h
+    window.h \
+    renderarea.h
 
 FORMS += \
     window.ui
