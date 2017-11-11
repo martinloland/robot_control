@@ -26,5 +26,7 @@ void window::on_btn_add_link_clicked()
     robot.addLink(&link);
     robot.print();
 
-    ui->links_list->addItem(link.name);
+    QString qstr = QString::fromStdString(link.name);
+
+    ui->links_list->addItem(qstr);
 }

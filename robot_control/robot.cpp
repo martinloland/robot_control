@@ -13,7 +13,6 @@ void Robot::print(){
     T.print();
 }
 
-
 void Robot::print_coord(){
     cout.precision(2);
     cout << "(x,y,z) = ";
@@ -22,7 +21,7 @@ void Robot::print_coord(){
 
 void Robot::addLink(Link* link){
     stringstream ss;
-    ss << "Link " << n_links;
+    ss << "Link " << n_links+1;
     link->name = ss.str();
     links.push_back(link);
     n_links += 1;
