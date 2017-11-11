@@ -17,6 +17,7 @@ public:
     void print();
     Transformation T;
     void print_coord();
+    vector<double> get_coords();
 
 private:
     int n_links = 0;

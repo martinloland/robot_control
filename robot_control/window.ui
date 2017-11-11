@@ -399,6 +399,24 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>dh_theta</tabstop>
+  <tabstop>dh_d</tabstop>
+  <tabstop>dh_a</tabstop>
+  <tabstop>dh_alpha</tabstop>
+  <tabstop>btn_add_link</tabstop>
+  <tabstop>links_list</tabstop>
+  <tabstop>for_theta</tabstop>
+  <tabstop>btn_for_move</tabstop>
+  <tabstop>inv_x</tabstop>
+  <tabstop>inv_y</tabstop>
+  <tabstop>inv_z</tabstop>
+  <tabstop>btn_inv_move</tabstop>
+  <tabstop>set_toolv</tabstop>
+  <tabstop>set_jointv</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>quit_button</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

@@ -29,4 +29,10 @@ void window::on_btn_add_link_clicked()
     QString qstr = QString::fromStdString(link.name);
 
     ui->links_list->addItem(qstr);
+//    ui->renderArea.drawLines(robot.get_points())
+
+    vector<double> coords = robot.get_coords();
+    for (double n : coords){
+        cout << n << endl;
+    }
 }
