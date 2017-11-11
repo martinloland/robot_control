@@ -1,5 +1,6 @@
 #include "robot.h"
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 Robot::Robot()
@@ -20,6 +21,9 @@ void Robot::print_coord(){
 }
 
 void Robot::addLink(Link* link){
+    stringstream ss;
+    ss << "Link " << n_links;
+    link->name = ss.str();
     links.push_back(link);
     n_links += 1;
     update_T();

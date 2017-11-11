@@ -1,5 +1,7 @@
 #include "window.h"
 #include "ui_window.h"
+#include <iostream>
+using namespace std;
 
 window::window(QWidget *parent) :
     QMainWindow(parent),
@@ -11,4 +13,18 @@ window::window(QWidget *parent) :
 window::~window()
 {
     delete ui;
+}
+
+void window::on_btn_add_link_clicked()
+{
+    double a =ui->dh_a->text().toDouble();
+    double alpha =ui->dh_alpha->text().toDouble();
+    double d =ui->dh_d->text().toDouble();
+    double theta =ui->dh_theta->text().toDouble();
+
+    Link link(a, alpha, d, theta);
+    robot.addLink(&link);
+    robot.print();
+
+    ui->links_list->addItem(link.name);
 }

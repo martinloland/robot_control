@@ -1,6 +1,8 @@
 #ifndef LINK_H
 #define LINK_H
 #include "transformation.h"
+#include <string>
+using namespace std;
 
 class Link
 {
@@ -10,6 +12,7 @@ public:
     Link();
     Link(double a, double alpha, double d, double theta);
     void print();
+    string name;
 
 private:
     // DH parameters

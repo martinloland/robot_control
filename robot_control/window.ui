@@ -33,7 +33,7 @@
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_7">
+         <widget class="QLineEdit" name="dh_d">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -45,6 +45,9 @@
             <width>30</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="placeholderText">
+           <string>[m]</string>
           </property>
          </widget>
         </item>
@@ -63,7 +66,7 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLineEdit" name="lineEdit_8">
+         <widget class="QLineEdit" name="dh_theta">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -75,11 +78,14 @@
             <width>30</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="placeholderText">
+           <string>[rad]</string>
           </property>
          </widget>
         </item>
         <item row="1" column="2">
-         <widget class="QLineEdit" name="lineEdit_5">
+         <widget class="QLineEdit" name="dh_a">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -91,11 +97,14 @@
             <width>30</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="placeholderText">
+           <string>[m]</string>
           </property>
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_6">
+         <widget class="QLineEdit" name="dh_alpha">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -107,6 +116,9 @@
             <width>30</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="placeholderText">
+           <string>[rad]</string>
           </property>
          </widget>
         </item>
@@ -127,25 +139,19 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btn_add_link">
         <property name="text">
          <string>Add</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QListView" name="listView">
+       <widget class="QListWidget" name="links_list">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>110</height>
-         </size>
         </property>
        </widget>
       </item>
@@ -179,19 +185,22 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="for_theta">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="placeholderText">
+           <string>[rad]</string>
+          </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="btn_for_move">
         <property name="text">
          <string>Move</string>
         </property>
@@ -220,7 +229,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QLineEdit" name="lineEdit_4">
+         <widget class="QLineEdit" name="inv_x">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -234,34 +243,40 @@
            <string/>
           </property>
           <property name="placeholderText">
-           <string/>
+           <string>x [m]</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_3">
+         <widget class="QLineEdit" name="inv_y">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="placeholderText">
+           <string>y [m]</string>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_2">
+         <widget class="QLineEdit" name="inv_z">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="placeholderText">
+           <string>z [m]</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btn_inv_move">
         <property name="text">
          <string>Move</string>
         </property>
@@ -297,12 +312,15 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_9">
+         <widget class="QLineEdit" name="set_toolv">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="placeholderText">
+           <string>[m/s]</string>
           </property>
          </widget>
         </item>
@@ -314,12 +332,15 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_10">
+         <widget class="QLineEdit" name="set_jointv">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="placeholderText">
+           <string>[rad/s]</string>
           </property>
          </widget>
         </item>
