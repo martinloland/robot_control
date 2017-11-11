@@ -21,6 +21,7 @@ void RenderArea::paintEvent(QPaintEvent *e)
     QPainter painter(this);
     draw_axis();
     draw_line(0.0, 0.0, 1.0, 1.0);
+    draw_line(1.0, 1.0, 1.4, 1.1);
 }
 
 void RenderArea::draw_line(double x1, double y1, double x2, double y2){

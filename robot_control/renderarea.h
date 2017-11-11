@@ -22,7 +22,7 @@ protected:
     int render_width;
     int render_height;
     int axis_margin = 20;
-    double scaling = 1.0/500.0;
+    double scaling = 1.0/300.0;
 
 private:
 
