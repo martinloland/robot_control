@@ -18,11 +18,9 @@ void RenderArea::resizeEvent(QResizeEvent *event)
 
 void RenderArea::paintEvent(QPaintEvent *e)
 {
-    QPainter painter(this);
+//    QPainter painter(this);
     draw_axis();
     draw_links();
-//    draw_line(0.0, 0.0, 1.0, 1.0);
-//    draw_line(1.0, 1.0, 1.4, 1.1
 }
 
 void RenderArea::draw_links(){

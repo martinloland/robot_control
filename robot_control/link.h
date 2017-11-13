@@ -13,13 +13,13 @@ public:
     Link(double a, double alpha, double d, double theta);
     void print();
     string name;
-    double theta;
 
 private:
     // DH parameters
     double _a;
     double _alpha;
     double _d;
+    double _theta;
 };
 
 

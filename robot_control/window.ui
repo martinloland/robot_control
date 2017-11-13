@@ -433,12 +433,76 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>60</x>
-     <y>573</y>
+     <x>72</x>
+     <y>607</y>
     </hint>
     <hint type="destinationlabel">
      <x>146</x>
      <y>634</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dh_alpha</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btn_add_link</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>67</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dh_a</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btn_add_link</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>72</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>123</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dh_d</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btn_add_link</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>81</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>100</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dh_theta</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btn_add_link</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>37</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>42</x>
+     <y>100</y>
     </hint>
    </hints>
   </connection>

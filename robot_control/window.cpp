@@ -27,22 +27,10 @@ void window::on_btn_add_link_clicked()
     robot.addLink(link);
 
     QString qstr = QString::fromStdString(link->name);
-
     ui->links_list->addItem(qstr);
 
     vector<double> coords = robot.get_coords();
-
-
     ui->renderArea->update_links(coords);
-
-//    for (vector<double>::iterator it = coords.begin();
-//         it != coords.end();
-//         it++){
-//        double x = *it;
-//        it++;
-//        double y = *it;
-//        cout << "(" << x << ", " << y << ")" << endl;
-//    }
 }
 
 void window::on_pushButton_clicked()
