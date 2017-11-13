@@ -13,6 +13,7 @@ public:
     explicit RenderArea(QWidget *parent = nullptr);
     void draw_line(double x1, double y1, double x2, double y2);
     void update_links(vector<double>& coords);
+    double scaling = 1.0/300.0;
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -26,7 +27,6 @@ protected:
     int render_width;
     int render_height;
     int axis_margin = 20;
-    double scaling = 1.0/300.0;
 
 private:
 

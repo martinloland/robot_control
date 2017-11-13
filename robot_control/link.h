@@ -13,6 +13,8 @@ public:
     Link(double a, double alpha, double d, double theta);
     void print();
     string name;
+    void change_theta(double theta);
+    void move_theta(double d_theta);
 
 private:
     // DH parameters
@@ -20,6 +22,7 @@ private:
     double _alpha;
     double _d;
     double _theta;
+    void update_A();
 };
 
 

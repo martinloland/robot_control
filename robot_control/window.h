@@ -21,7 +21,13 @@ public:
 private slots:
     void on_btn_add_link_clicked();
 
-    void on_pushButton_clicked();
+    void on_print_robot_clicked();
+
+    void on_btn_for_move_clicked();
+
+    void on_ui_scale_valueChanged(int value);
+
+    void on_btn_add_default_clicked();
 
 private:
     Ui::window *ui;

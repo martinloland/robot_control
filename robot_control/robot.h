@@ -19,6 +19,7 @@ public:
     Transformation T;
     void print_coord();
     vector<double> get_coords();
+    void change_theta(double theta, int link_index);
 
 private:
     int n_links = 0;

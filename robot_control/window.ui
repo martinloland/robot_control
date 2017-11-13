@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>620</height>
+    <width>1000</width>
+    <height>707</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -139,6 +139,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QPushButton" name="btn_add_default">
+        <property name="text">
+         <string>Add default link</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btn_add_link">
         <property name="text">
          <string>Add</string>
@@ -193,7 +200,7 @@
            </sizepolicy>
           </property>
           <property name="placeholderText">
-           <string>[rad]</string>
+           <string>[deg]</string>
           </property>
          </widget>
         </item>
@@ -347,6 +354,41 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>Scale</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="ui_scale">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimum">
+         <number>100</number>
+        </property>
+        <property name="maximum">
+         <number>800</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>0</number>
+        </property>
+        <property name="value">
+         <number>300</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="checkBox">
         <property name="text">
          <string>Easy ease</string>
@@ -367,7 +409,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="print_robot">
         <property name="text">
          <string>Print robot</string>
         </property>
@@ -503,6 +545,22 @@
     <hint type="destinationlabel">
      <x>42</x>
      <y>100</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>for_theta</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btn_for_move</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>144</x>
+     <y>299</y>
     </hint>
    </hints>
   </connection>

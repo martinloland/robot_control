@@ -33,10 +33,44 @@ void window::on_btn_add_link_clicked()
     ui->renderArea->update_links(coords);
 }
 
-void window::on_pushButton_clicked()
+void window::on_print_robot_clicked()
 {
     robot.print_links();
     cout << "Robot :" << endl;
     robot.print();
     cout << endl;
+}
+
+void window::on_btn_for_move_clicked()
+{
+    int link_index = ui->links_list->currentRow();
+    double theta = ui->for_theta->text().toDouble()*3.14159265359/180.0;
+    if (link_index >=0){
+        robot.change_theta(theta, link_index);
+    }
+    vector<double> coords = robot.get_coords();
+    ui->renderArea->update_links(coords);
+}
+
+void window::on_ui_scale_valueChanged(int value)
+{
+    ui->renderArea->scaling = 1.0/value;
+    ui->renderArea->update();
+}
+
+void window::on_btn_add_default_clicked()
+{
+    Link* link1 = new Link(1.0, 0, 0, 45.0*3.14159265359/180.0);
+    Link* link2 = new Link(0.2, 0, 0, -45.0*3.14159265359/180.0);
+
+    robot.addLink(link1);
+    QString qstr = QString::fromStdString(link1->name);
+    ui->links_list->addItem(qstr);
+
+    robot.addLink(link2);
+    QString qstr2 = QString::fromStdString(link2->name);
+    ui->links_list->addItem(qstr2);
+
+    vector<double> coords = robot.get_coords();
+    ui->renderArea->update_links(coords);
 }
