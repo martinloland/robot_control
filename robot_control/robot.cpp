@@ -9,7 +9,6 @@ Robot::Robot()
 }
 
 void Robot::print(){
-    cout << "total links in robot: " << n_links << ", T:" << endl;
     T.print();
 }
 
@@ -32,8 +31,17 @@ void Robot::update_T(){
     T.identity();
     if (n_links>0){
         for (Link* n : links){
+            cout << endl;
             T *= n->A;
         }
+    }
+}
+
+void Robot::print_links(){
+    for (Link* n : links){
+        cout << n->name << " :" << endl;
+        n->print();
+        cout << endl;
     }
 }
 
@@ -42,11 +50,9 @@ vector<double> Robot::get_coords(){
     homo.identity();
     vector<double> coords;
     for (Link* n : links){
-//        n->A.print();
         homo *= n->A;
         coords.push_back(homo.T[0][3]);
         coords.push_back(homo.T[1][3]);
     }
-//    homo.print();
     return coords;
 }

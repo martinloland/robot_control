@@ -21,6 +21,8 @@ public:
 private slots:
     void on_btn_add_link_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::window *ui;
 };

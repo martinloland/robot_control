@@ -15,6 +15,7 @@ public:
 
     void addLink(Link* link);
     void print();
+    void print_links();
     Transformation T;
     void print_coord();
     vector<double> get_coords();

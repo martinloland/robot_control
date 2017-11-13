@@ -86,8 +86,6 @@ void Transformation::change(double a, double alpha, double d, double theta){
 
 Transformation Transformation::operator*(const Transformation& b){
     Transformation t;
-
-    // Multiplying matrix firstMatrix and secondMatrix and storing in array mult.
     for(int i = 0; i < 4; ++i)
     {
         for(int j = 0; j < 4; ++j)

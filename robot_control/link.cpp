@@ -11,7 +11,7 @@ Link::Link(double a, double alpha, double d, double theta){
     _a = a;
     _alpha = alpha;
     _d = d;
-    _theta = theta;
+    theta = theta;
 }
 
 void Link::print(){
