@@ -29,6 +29,8 @@ private slots:
 
     void on_btn_add_default_clicked();
 
+    void on_btn_inv_move_clicked();
+
 private:
     Ui::window *ui;
 };

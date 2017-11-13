@@ -62,3 +62,7 @@ vector<double> Robot::get_coords(){
 void Robot::change_theta(double theta, int link_index){
     links.at(link_index)->change_theta(theta);
 }
+
+void Robot::inverse(Transformation* t){
+    t->print();
+}

@@ -475,8 +475,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>72</x>
-     <y>607</y>
+     <x>84</x>
+     <y>694</y>
     </hint>
     <hint type="destinationlabel">
      <x>146</x>
@@ -495,8 +495,8 @@
      <y>67</y>
     </hint>
     <hint type="destinationlabel">
-     <x>163</x>
-     <y>104</y>
+     <x>175</x>
+     <y>151</y>
     </hint>
    </hints>
   </connection>
@@ -511,8 +511,8 @@
      <y>72</y>
     </hint>
     <hint type="destinationlabel">
-     <x>123</x>
-     <y>104</y>
+     <x>135</x>
+     <y>151</y>
     </hint>
    </hints>
   </connection>
@@ -527,8 +527,8 @@
      <y>69</y>
     </hint>
     <hint type="destinationlabel">
-     <x>82</x>
-     <y>100</y>
+     <x>94</x>
+     <y>151</y>
     </hint>
    </hints>
   </connection>
@@ -543,8 +543,8 @@
      <y>65</y>
     </hint>
     <hint type="destinationlabel">
-     <x>42</x>
-     <y>100</y>
+     <x>54</x>
+     <y>151</y>
     </hint>
    </hints>
   </connection>
@@ -555,12 +555,60 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>160</x>
-     <y>265</y>
+     <x>193</x>
+     <y>310</y>
     </hint>
     <hint type="destinationlabel">
-     <x>144</x>
-     <y>299</y>
+     <x>156</x>
+     <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>inv_x</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btn_inv_move</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>81</x>
+     <y>431</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>inv_y</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btn_inv_move</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>401</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>121</x>
+     <y>436</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>inv_z</sender>
+   <signal>returnPressed()</signal>
+   <receiver>btn_inv_move</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>397</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>169</x>
+     <y>427</y>
     </hint>
    </hints>
   </connection>

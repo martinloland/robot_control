@@ -24,7 +24,6 @@ void RenderArea::mousePressEvent(QMouseEvent *event){
 
 void RenderArea::paintEvent(QPaintEvent *e)
 {
-//    QPainter painter(this);
     draw_axis();
     draw_links();
 }
