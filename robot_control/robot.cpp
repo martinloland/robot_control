@@ -49,6 +49,8 @@ vector<double> Robot::get_coords(){
     Transformation homo;
     homo.identity();
     vector<double> coords;
+    coords.push_back(0);
+    coords.push_back(0);
     for (Link* n : links){
         homo *= n->A;
         coords.push_back(homo.T[0][3]);

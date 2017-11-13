@@ -20,16 +20,26 @@ void RenderArea::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
     draw_axis();
-    draw_line(0.0, 0.0, 1.0, 1.0);
-    draw_line(1.0, 1.0, 1.4, 1.1);
-
+    draw_links();
+//    draw_line(0.0, 0.0, 1.0, 1.0);
+//    draw_line(1.0, 1.0, 1.4, 1.1
 }
 
-void RenderArea::draw_polyline(double *array, int n_points){
-    for(int i = 0; i < n_points-1; ++i)
-    {
-
+void RenderArea::draw_links(){
+    if (robotLinks.size() >= 4){
+        for (int i=0; i<robotLinks.size()-2; i+=2){
+            draw_line(robotLinks.at(i), robotLinks.at(i+1),
+                      robotLinks.at(i+2), robotLinks.at(i+3));
+        }
     }
+}
+
+void RenderArea::update_links(vector<double>& coords){
+    robotLinks.clear();
+    for (double n : coords){
+        robotLinks.push_back(n);
+    }
+    update();
 }
 
 void RenderArea::draw_line(double x1, double y1, double x2, double y2){

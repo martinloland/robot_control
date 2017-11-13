@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPainter>
+using namespace std;
 
 class RenderArea : public QWidget
 {
@@ -11,7 +12,7 @@ class RenderArea : public QWidget
 public:
     explicit RenderArea(QWidget *parent = nullptr);
     void draw_line(double x1, double y1, double x2, double y2);
-    void draw_polyline(double *array, int n_points);
+    void update_links(vector<double>& coords);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -19,6 +20,8 @@ protected:
 
     void draw_axis();
     QPoint render_coord(double x, double y);
+    vector<double> robotLinks;
+    void draw_links();
 
     int render_width;
     int render_height;

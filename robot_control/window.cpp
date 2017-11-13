@@ -30,7 +30,11 @@ void window::on_btn_add_link_clicked()
 
     ui->links_list->addItem(qstr);
 
-//    vector<double> coords = robot.get_coords();
+    vector<double> coords = robot.get_coords();
+
+
+    ui->renderArea->update_links(coords);
+
 //    for (vector<double>::iterator it = coords.begin();
 //         it != coords.end();
 //         it++){
