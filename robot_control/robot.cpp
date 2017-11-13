@@ -31,7 +31,6 @@ void Robot::update_T(){
     T.identity();
     if (n_links>0){
         for (Link* n : links){
-            cout << endl;
             T *= n->A;
         }
     }
@@ -61,6 +60,7 @@ vector<double> Robot::get_coords(){
 
 void Robot::change_theta(double theta, int link_index){
     links.at(link_index)->change_theta(theta);
+    update_T();
 }
 
 void Robot::inverse(Transformation* t){

@@ -31,6 +31,8 @@ private slots:
 
     void on_btn_inv_move_clicked();
 
+    void on_for_theta_sli_valueChanged(int value);
+
 private:
     Ui::window *ui;
 };

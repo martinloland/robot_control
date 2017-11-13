@@ -207,6 +207,25 @@
        </layout>
       </item>
       <item>
+       <widget class="QSlider" name="for_theta_sli">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimum">
+         <number>-179</number>
+        </property>
+        <property name="maximum">
+         <number>180</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btn_for_move">
         <property name="text">
          <string>Move</string>
@@ -556,7 +575,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>193</x>
-     <y>310</y>
+     <y>281</y>
     </hint>
     <hint type="destinationlabel">
      <x>156</x>

@@ -50,6 +50,7 @@ void window::on_btn_for_move_clicked()
     }
     vector<double> coords = robot.get_coords();
     ui->renderArea->update_links(coords);
+    ui->for_theta_sli->setValue(ui->for_theta->text().toDouble());
 }
 
 void window::on_ui_scale_valueChanged(int value)
@@ -82,4 +83,11 @@ void window::on_btn_inv_move_clicked()
                 ui->inv_y->text().toDouble(),
                 ui->inv_z->text().toDouble());
     robot.inverse(&t);
+}
+
+void window::on_for_theta_sli_valueChanged(int value)
+{
+    ui->for_theta->clear();
+    ui->for_theta->insert(QString::number(value));
+    on_btn_for_move_clicked();
 }
