@@ -1,5 +1,6 @@
 #include "renderarea.h"
 #include <iostream>
+#include <QMouseEvent>
 using namespace std;
 
 RenderArea::RenderArea(QWidget *parent)
@@ -14,6 +15,11 @@ void RenderArea::resizeEvent(QResizeEvent *event)
     render_width = width();
     render_height = height();
     update();
+}
+
+void RenderArea::mousePressEvent(QMouseEvent *event){
+    coord2D real = real_coord(event->x(), event->y());
+    cout << "(" << real.x << ", " << real.y << ")" << endl;
 }
 
 void RenderArea::paintEvent(QPaintEvent *e)
@@ -77,4 +83,11 @@ void RenderArea::draw_axis(){
 QPoint RenderArea::render_coord(double x, double y){
     return QPoint(x/scaling+axis_margin,
                   render_height-y/scaling-axis_margin);
+}
+
+coord2D RenderArea::real_coord(double x, double y){
+    coord2D cor;
+    cor.x = (x-axis_margin)*scaling;
+    cor.y = (render_height-y-axis_margin)*scaling;
+    return cor;
 }

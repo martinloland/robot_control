@@ -61,7 +61,7 @@ void window::on_ui_scale_valueChanged(int value)
 void window::on_btn_add_default_clicked()
 {
     Link* link1 = new Link(1.0, 0, 0, 45.0*3.14159265359/180.0);
-    Link* link2 = new Link(0.2, 0, 0, -45.0*3.14159265359/180.0);
+    Link* link2 = new Link(0.8, 0, 0, -45.0*3.14159265359/180.0);
 
     robot.addLink(link1);
     QString qstr = QString::fromStdString(link1->name);

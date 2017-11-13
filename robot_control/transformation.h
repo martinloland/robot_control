@@ -13,6 +13,7 @@ public:
     void identity();
     void zero();
     void replace(const Transformation& t);
+    void displace(double x, double y, double z);
 
     double x();
     double y();

@@ -137,3 +137,9 @@ void Transformation::print()
         cout << endl;
     }
 }
+
+void Transformation::displace(double x, double y, double z){
+    T[0][3] += x;
+    T[1][3] += y;
+    T[2][3] += z;
+}
