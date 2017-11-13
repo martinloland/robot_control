@@ -42,9 +42,11 @@ vector<double> Robot::get_coords(){
     homo.identity();
     vector<double> coords;
     for (Link* n : links){
+//        n->A.print();
         homo *= n->A;
         coords.push_back(homo.T[0][3]);
         coords.push_back(homo.T[1][3]);
     }
+//    homo.print();
     return coords;
 }
