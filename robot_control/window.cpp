@@ -1,6 +1,7 @@
 #include "window.h"
 #include "ui_window.h"
 #include <iostream>
+#include <time.h>
 using namespace std;
 
 window::window(QWidget *parent) :
@@ -100,4 +101,28 @@ void window::on_btn_setEnd_clicked()
         robot.set_theta_end(theta, link_index);
     }
 
+}
+
+void window::on_animForward_clicked()
+{
+    start_animation(1);
+}
+
+void window::on_animBack_clicked()
+{
+    start_animation(0);
+}
+
+void window::start_animation(int forward){
+    int tot_anim_time = ui->anim_time->text().toInt()*1000;
+    int start_time = clock();
+    double anim_percent = 0.0;
+    while (clock()-start_time < tot_anim_time){
+        if (forward){
+            anim_percent = ((double)clock()-(double)start_time)/(double)tot_anim_time;
+        }else{
+            anim_percent = 1.0-((double)clock()-(double)start_time)/(double)tot_anim_time;
+        }
+        cout << anim_percent << endl;
+    }
 }

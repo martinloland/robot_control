@@ -280,7 +280,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="inv_x">
+         <widget class="QLineEdit" name="anim_time">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -435,7 +435,7 @@
   <tabstop>links_list</tabstop>
   <tabstop>for_theta</tabstop>
   <tabstop>btn_for_move</tabstop>
-  <tabstop>inv_x</tabstop>
+  <tabstop>anim_time</tabstop>
   <tabstop>quit_button</tabstop>
  </tabstops>
  <resources/>
@@ -537,7 +537,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>inv_x</sender>
+   <sender>anim_time</sender>
    <signal>returnPressed()</signal>
    <receiver>animForward</receiver>
    <slot>click()</slot>

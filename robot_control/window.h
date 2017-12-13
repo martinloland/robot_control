@@ -35,8 +35,13 @@ private slots:
 
     void on_btn_setEnd_clicked();
 
+    void on_animForward_clicked();
+
+    void on_animBack_clicked();
+
 private:
     Ui::window *ui;
+    void start_animation(int forward);
 };
 
 #endif // WINDOW_H
