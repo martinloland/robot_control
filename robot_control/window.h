@@ -39,9 +39,12 @@ private slots:
 
     void on_animBack_clicked();
 
+    void on_links_list_clicked(const QModelIndex &index);
+
 private:
     Ui::window *ui;
     void start_animation(int forward);
+    void update_variables(int link_index);
 };
 
 #endif // WINDOW_H

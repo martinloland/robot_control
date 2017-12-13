@@ -139,16 +139,16 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_add_default">
+       <widget class="QPushButton" name="btn_add_link">
         <property name="text">
-         <string>Add default link</string>
+         <string>Add</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_add_link">
+       <widget class="QPushButton" name="btn_add_default">
         <property name="text">
-         <string>Add</string>
+         <string>Add default links</string>
         </property>
        </widget>
       </item>

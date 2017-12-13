@@ -38,3 +38,12 @@ void Link::animate(double per){
     change_theta(q);
     update_A();
 }
+
+map<string, float> Link::getLinkMap(){
+    map<string, float> values;
+    values["a"] = _a;
+    values["alpha"] = _alpha;
+    values["d"] = _d;
+    values["theta"] = _theta;
+    return values;
+}

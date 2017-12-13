@@ -2,6 +2,7 @@
 #define LINK_H
 #include "transformation.h"
 #include <string>
+#include <map>
 using namespace std;
 
 class Link
@@ -18,6 +19,7 @@ public:
     double theta_start = 0;
     double theta_end = 0;
     void animate(double per);
+    map<string, float> getLinkMap();
 
 private:
     // DH parameters

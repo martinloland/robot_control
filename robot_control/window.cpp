@@ -2,6 +2,7 @@
 #include "ui_window.h"
 #include <iostream>
 #include <time.h>
+#include "link.h"
 using namespace std;
 
 window::window(QWidget *parent) :
@@ -35,7 +36,8 @@ void window::on_btn_add_link_clicked()
 }
 
 void window::on_print_robot_clicked()
-{
+{    
+    cout << "=======================" << endl;
     robot.print_links();
     cout << "Robot :" << endl;
     robot.print();
@@ -130,6 +132,17 @@ void window::start_animation(int forward){
         robot.animate(anim_percent);
         vector<double> coords = robot.get_coords();
         ui->renderArea->update_links(coords);
-//        cout << anim_percent << endl;
     }
+}
+
+void window::on_links_list_clicked(const QModelIndex &index)
+{
+    update_variables(index.row());
+}
+
+void window::update_variables(int link_index){
+    map<string, float> values;
+    values = robot.get_link_theta(link_index);
+    cout << values["theta"] << endl;
+    ui->for_theta_sli->setValue(values["theta"]*180.0/3.14159265359);
 }
