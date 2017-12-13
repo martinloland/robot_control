@@ -407,6 +407,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QPushButton" name="btn_for_move">
+        <property name="text">
+         <string>Move</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QSlider" name="for_theta_sli">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
@@ -422,13 +429,6 @@
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_for_move">
-        <property name="text">
-         <string>Move</string>
         </property>
        </widget>
       </item>
@@ -505,14 +505,14 @@
         <item>
          <widget class="QPushButton" name="animBack">
           <property name="text">
-           <string>&lt; Backward</string>
+           <string>&lt; too start</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="animForward">
           <property name="text">
-           <string>Forward &gt;</string>
+           <string>to end &gt;</string>
           </property>
          </widget>
         </item>
@@ -634,7 +634,6 @@
   <tabstop>btn_add_link</tabstop>
   <tabstop>links_list</tabstop>
   <tabstop>for_theta</tabstop>
-  <tabstop>btn_for_move</tabstop>
   <tabstop>anim_time</tabstop>
   <tabstop>quit_button</tabstop>
  </tabstops>
