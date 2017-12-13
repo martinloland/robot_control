@@ -15,6 +15,8 @@ public:
     string name;
     void change_theta(double theta);
     void move_theta(double d_theta);
+    double theta_start = 0;
+    double theta_end = 0;
 
 private:
     // DH parameters

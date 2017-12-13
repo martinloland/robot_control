@@ -62,3 +62,13 @@ void Robot::change_theta(double theta, int link_index){
     links.at(link_index)->change_theta(theta);
     update_T();
 }
+
+void Robot::set_theta_start(double theta, int link_index){
+    links.at(link_index)->theta_start = theta;
+    cout << links.at(link_index)->theta_start << endl;
+}
+
+void Robot::set_theta_end(double theta, int link_index){
+    links.at(link_index)->theta_end = theta;
+    cout << links.at(link_index)->theta_end << endl;
+}

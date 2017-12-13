@@ -20,6 +20,8 @@ public:
     void print_coord();
     vector<double> get_coords();
     void change_theta(double theta, int link_index);
+    void set_theta_start(double theta, int link_index);
+    void set_theta_end(double theta, int link_index);
 
 private:
     int n_links = 0;

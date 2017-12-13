@@ -82,3 +82,22 @@ void window::on_for_theta_sli_valueChanged(int value)
     ui->for_theta->insert(QString::number(value));
     on_btn_for_move_clicked();
 }
+
+void window::on_btn_setStart_clicked()
+{
+    int link_index = ui->links_list->currentRow();
+    if (link_index >= 0){
+        double theta = ui->for_theta->text().toDouble()*3.14159265359/180.0;
+        robot.set_theta_start(theta, link_index);
+    }
+}
+
+void window::on_btn_setEnd_clicked()
+{
+    int link_index = ui->links_list->currentRow();
+    if (link_index >= 0){
+        double theta = ui->for_theta->text().toDouble()*3.14159265359/180.0;
+        robot.set_theta_end(theta, link_index);
+    }
+
+}
