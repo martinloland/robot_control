@@ -20,7 +20,6 @@ public:
     void print_coord();
     vector<double> get_coords();
     void change_theta(double theta, int link_index);
-    void inverse(Transformation* t);
 
 private:
     int n_links = 0;

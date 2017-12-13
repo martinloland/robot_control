@@ -62,7 +62,3 @@ void Robot::change_theta(double theta, int link_index){
     links.at(link_index)->change_theta(theta);
     update_T();
 }
-
-void Robot::inverse(Transformation* t){
-    t->print();
-}

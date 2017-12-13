@@ -178,7 +178,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Forward</string>
+         <string>Joint angle</string>
         </property>
        </widget>
       </item>
@@ -233,6 +233,24 @@
        </widget>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QPushButton" name="btn_setStart">
+          <property name="text">
+           <string>Set start</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_setEnd">
+          <property name="text">
+           <string>Set end</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="Line" name="line_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -248,12 +266,19 @@
          </font>
         </property>
         <property name="text">
-         <string>Inverse</string>
+         <string>Animation</string>
         </property>
        </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Animation time:</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLineEdit" name="inv_x">
           <property name="sizePolicy">
@@ -266,47 +291,32 @@
            <set>Qt::ImhNone</set>
           </property>
           <property name="text">
-           <string/>
+           <string>2</string>
           </property>
           <property name="placeholderText">
-           <string>x [m]</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="inv_y">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="placeholderText">
-           <string>y [m]</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="inv_z">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="placeholderText">
-           <string>z [m]</string>
+           <string>[s]</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_inv_move">
-        <property name="text">
-         <string>Move</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="animBack">
+          <property name="text">
+           <string>&lt; Backward</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="animForward">
+          <property name="text">
+           <string>Forward &gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="Line" name="line_3">
@@ -327,50 +337,6 @@
          <string>Settings</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <layout class="QFormLayout" name="formLayout">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Tool velocity</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="set_toolv">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="placeholderText">
-           <string>[m/s]</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string>Joint velocity</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="set_jointv">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="placeholderText">
-           <string>[rad/s]</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
       </item>
       <item>
        <widget class="QLabel" name="label_12">
@@ -404,13 +370,6 @@
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox">
-        <property name="text">
-         <string>Easy ease</string>
         </property>
        </widget>
       </item>
@@ -477,12 +436,6 @@
   <tabstop>for_theta</tabstop>
   <tabstop>btn_for_move</tabstop>
   <tabstop>inv_x</tabstop>
-  <tabstop>inv_y</tabstop>
-  <tabstop>inv_z</tabstop>
-  <tabstop>btn_inv_move</tabstop>
-  <tabstop>set_toolv</tabstop>
-  <tabstop>set_jointv</tabstop>
-  <tabstop>checkBox</tabstop>
   <tabstop>quit_button</tabstop>
  </tabstops>
  <resources/>
@@ -586,7 +539,7 @@
   <connection>
    <sender>inv_x</sender>
    <signal>returnPressed()</signal>
-   <receiver>btn_inv_move</receiver>
+   <receiver>animForward</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -596,38 +549,6 @@
     <hint type="destinationlabel">
      <x>81</x>
      <y>431</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>inv_y</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btn_inv_move</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>106</x>
-     <y>401</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>121</x>
-     <y>436</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>inv_z</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btn_inv_move</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>169</x>
-     <y>397</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>169</x>
-     <y>427</y>
     </hint>
    </hints>
   </connection>

@@ -76,15 +76,6 @@ void window::on_btn_add_default_clicked()
     ui->renderArea->update_links(coords);
 }
 
-void window::on_btn_inv_move_clicked()
-{
-    Transformation t;
-    t.displace(ui->inv_x->text().toDouble(),
-                ui->inv_y->text().toDouble(),
-                ui->inv_z->text().toDouble());
-    robot.inverse(&t);
-}
-
 void window::on_for_theta_sli_valueChanged(int value)
 {
     ui->for_theta->clear();
