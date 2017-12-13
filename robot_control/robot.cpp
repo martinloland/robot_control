@@ -80,6 +80,6 @@ void Robot::animate(double percentage){
     update_T();
 }
 
-map<string, float> Robot::get_link_theta(int link_index){
+map<string, double> Robot::get_link_theta(int link_index){
     return links.at(link_index)->getLinkMap();
 }

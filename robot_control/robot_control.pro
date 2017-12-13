@@ -34,7 +34,8 @@ HEADERS += \
     link.h \
     transformation.h \
     window.h \
-    renderarea.h
+    renderarea.h \
+    vector_lib.h
 
 FORMS += \
     window.ui

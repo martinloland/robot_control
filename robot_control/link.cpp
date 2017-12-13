@@ -8,9 +8,9 @@ Link::Link()
 }
 
 Link::Link(double a, double alpha, double d, double theta){
-    _a = a;
-    _alpha = alpha;
-    _d = d;
+    _DHa = a;
+    _DHalpha = alpha;
+    _DHd = d;
     _theta = theta;
     update_A();
 }
@@ -20,7 +20,7 @@ void Link::print(){
 }
 
 void Link::update_A(){
-    A.change(_a, _alpha, _d, _theta);
+    A.change(_DHa, _DHalpha, _DHd, _theta);
 }
 
 void Link::change_theta(double theta){
@@ -39,11 +39,11 @@ void Link::animate(double per){
     update_A();
 }
 
-map<string, float> Link::getLinkMap(){
-    map<string, float> values;
-    values["a"] = _a;
-    values["alpha"] = _alpha;
-    values["d"] = _d;
+map<string, double> Link::getLinkMap(){
+    map<string, double> values;
+    values["DHa"] = _DHa;
+    values["DHalpha"] = _DHalpha;
+    values["DHd"] = _DHd;
     values["theta"] = _theta;
     return values;
 }

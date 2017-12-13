@@ -141,7 +141,7 @@ void window::on_links_list_clicked(const QModelIndex &index)
 }
 
 void window::update_variables(int link_index){
-    map<string, float> values;
+    map<string, double> values;
     values = robot.get_link_theta(link_index);
     cout << values["theta"] << endl;
     ui->for_theta_sli->setValue(values["theta"]*180.0/3.14159265359);

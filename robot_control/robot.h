@@ -23,7 +23,7 @@ public:
     void set_theta_start(double theta, int link_index);
     void set_theta_end(double theta, int link_index);
     void animate(double percentage);
-    map<string, float> get_link_theta(int link_index);
+    map<string, double> get_link_theta(int link_index);
 
 
 private:
