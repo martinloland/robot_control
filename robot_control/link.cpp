@@ -45,5 +45,25 @@ map<string, double> Link::getLinkMap(){
     values["DHalpha"] = _DHalpha;
     values["DHd"] = _DHd;
     values["theta"] = _theta;
+    values["m"] = _m;
+    values["ixx"] = _I.M[0][0];
+    values["ixy"] = _I.M[0][1];
+    values["ixz"] = _I.M[0][2];
+    values["iyy"] = _I.M[1][1];
+    values["iyz"] = _I.M[1][2];
+    values["izz"] = _I.M[2][2];
     return values;
+}
+
+void Link::set_weight(double m,
+                double ixx,
+                double ixy,
+                double ixz,
+                double iyy,
+                double iyz,
+                double izz){
+    _m = m;
+    _I = {ixx, ixy, ixz,
+         ixy, iyy, iyz,
+         ixz, iyz, izz};
 }

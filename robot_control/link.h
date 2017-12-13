@@ -22,6 +22,13 @@ public:
     double theta_end = 0;
     void animate(double per);
     map<string, double> getLinkMap();
+    void set_weight(double m,
+                    double ixx,
+                    double ixy,
+                    double ixz,
+                    double iyy,
+                    double iyz,
+                    double izz);
 
 private:
     // DH parameters
@@ -39,7 +46,7 @@ private:
     vec _ac;
     vec _f;
     vec _t;
-    double _m;
+    double _m = 0;
     inertia _I;
 
 };

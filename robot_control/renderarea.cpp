@@ -26,6 +26,7 @@ void RenderArea::paintEvent(QPaintEvent *e)
 {
     draw_axis();
     draw_links();
+    //draw_arrow(0.0, 0.0, 0.0, 0.0, Qt::green);
 }
 
 void RenderArea::draw_links(){
@@ -49,6 +50,15 @@ void RenderArea::draw_line(double x1, double y1, double x2, double y2){
     QPainter painter(this);
     painter.drawLine(render_coord(x1,y1),
                      render_coord(x2,y2));
+}
+
+void RenderArea::draw_arrow(double x, double y, double angle,
+                            double magnitude, Qt::GlobalColor color){
+    QPainter painter(this);
+    QPen pen(color, 3, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin);
+    painter.setPen(pen);
+    painter.drawLine(render_coord(0,0),
+            render_coord(2,2));
 }
 
 void RenderArea::draw_axis(){

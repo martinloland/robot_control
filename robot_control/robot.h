@@ -23,8 +23,15 @@ public:
     void set_theta_start(double theta, int link_index);
     void set_theta_end(double theta, int link_index);
     void animate(double percentage);
-    map<string, double> get_link_theta(int link_index);
-
+    map<string, double> get_link_map(int link_index);
+    void set_weight(double m,
+                    double ixx,
+                    double ixy,
+                    double ixz,
+                    double iyy,
+                    double iyz,
+                    double izz,
+                    int link_index);
 
 private:
     int n_links = 0;

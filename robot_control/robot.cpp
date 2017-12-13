@@ -80,6 +80,18 @@ void Robot::animate(double percentage){
     update_T();
 }
 
-map<string, double> Robot::get_link_theta(int link_index){
+map<string, double> Robot::get_link_map(int link_index){
     return links.at(link_index)->getLinkMap();
+}
+
+void Robot::set_weight(double m,
+                double ixx,
+                double ixy,
+                double ixz,
+                double iyy,
+                double iyz,
+                double izz,
+                int link_index){
+    links.at(link_index)->set_weight(m, ixx, ixy, ixz, iyy, iyz, izz);
+
 }

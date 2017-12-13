@@ -142,10 +142,33 @@ void window::on_links_list_clicked(const QModelIndex &index)
 
 void window::update_variables(int link_index){
     map<string, double> values;
-    values = robot.get_link_theta(link_index);
+    values = robot.get_link_map(link_index);
     ui->for_theta_sli->setValue(values["theta"]*180.0/3.14159265359);
     ui->dh_a->setText(QString::number(values["DHa"]));
     ui->dh_alpha->setText(QString::number(values["DHalpha"]));
     ui->dh_d->setText(QString::number(values["DHd"]));
     ui->dh_theta->setText(QString::number(values["theta"]));
+    ui->mass->setText(QString::number(values["m"]));
+    ui->ixx->setText(QString::number(values["ixx"]));
+    ui->ixy->setText(QString::number(values["ixy"]));
+    ui->ixz->setText(QString::number(values["ixz"]));
+    ui->iyy->setText(QString::number(values["iyy"]));
+    ui->iyz->setText(QString::number(values["iyz"]));
+    ui->izz->setText(QString::number(values["izz"]));
+}
+
+void window::on_pushButton_clicked()
+{
+    int link_index = ui->links_list->currentRow();
+    if (link_index >= 0){
+        robot.set_weight(
+                    ui->mass->text().toDouble(),
+                    ui->ixx->text().toDouble(),
+                    ui->ixy->text().toDouble(),
+                    ui->ixz->text().toDouble(),
+                    ui->iyy->text().toDouble(),
+                    ui->iyz->text().toDouble(),
+                    ui->izz->text().toDouble(),
+                    link_index);
+    }
 }

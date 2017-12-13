@@ -41,6 +41,8 @@ private slots:
 
     void on_links_list_clicked(const QModelIndex &index);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::window *ui;
     void start_animation(int forward);
