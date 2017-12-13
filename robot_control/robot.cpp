@@ -72,3 +72,9 @@ void Robot::set_theta_end(double theta, int link_index){
     links.at(link_index)->theta_end = theta;
     cout << links.at(link_index)->theta_end << endl;
 }
+
+void Robot::animate(double percentage){
+    for (Link* n : links){
+        n->animate(percentage);
+    }
+}

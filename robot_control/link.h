@@ -17,6 +17,7 @@ public:
     void move_theta(double d_theta);
     double theta_start = 0;
     double theta_end = 0;
+    void animate(double per);
 
 private:
     // DH parameters

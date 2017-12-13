@@ -62,8 +62,12 @@ void window::on_ui_scale_valueChanged(int value)
 
 void window::on_btn_add_default_clicked()
 {
-    Link* link1 = new Link(1.0, 0, 0, 45.0*3.14159265359/180.0);
-    Link* link2 = new Link(0.8, 0, 0, -45.0*3.14159265359/180.0);
+    Link* link1 = new Link(1.0, 0, 0, 1.4);
+    Link* link2 = new Link(0.8, 0, 0, -2.0);
+    link1->theta_start = 1.4;
+    link1->theta_end = 0.17;
+    link2->theta_start = -2.0;
+    link2->theta_end = 1.9;
 
     robot.addLink(link1);
     QString qstr = QString::fromStdString(link1->name);
@@ -114,7 +118,7 @@ void window::on_animBack_clicked()
 }
 
 void window::start_animation(int forward){
-    int tot_anim_time = ui->anim_time->text().toInt()*1000;
+    int tot_anim_time = ui->anim_time->text().toDouble()*1000;
     int start_time = clock();
     double anim_percent = 0.0;
     while (clock()-start_time < tot_anim_time){
@@ -123,6 +127,9 @@ void window::start_animation(int forward){
         }else{
             anim_percent = 1.0-((double)clock()-(double)start_time)/(double)tot_anim_time;
         }
-        cout << anim_percent << endl;
+        robot.animate(anim_percent);
+        vector<double> coords = robot.get_coords();
+        ui->renderArea->update_links(coords);
+//        cout << anim_percent << endl;
     }
 }

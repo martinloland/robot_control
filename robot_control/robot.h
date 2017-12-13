@@ -22,6 +22,7 @@ public:
     void change_theta(double theta, int link_index);
     void set_theta_start(double theta, int link_index);
     void set_theta_end(double theta, int link_index);
+    void animate(double percentage);
 
 private:
     int n_links = 0;

@@ -1,5 +1,6 @@
 #include "link.h"
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 Link::Link()
@@ -29,5 +30,11 @@ void Link::change_theta(double theta){
 
 void Link::move_theta(double d_theta){
     _theta += d_theta;
+    update_A();
+}
+
+void Link::animate(double per){
+    double q = theta_start + (theta_end-theta_start)*(6*pow(per,5)-15*pow(per,4)+10*pow(per,3));
+    change_theta(q);
     update_A();
 }

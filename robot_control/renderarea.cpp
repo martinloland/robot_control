@@ -42,7 +42,7 @@ void RenderArea::update_links(vector<double>& coords){
     for (double n : coords){
         robotLinks.push_back(n);
     }
-    update();
+    repaint();
 }
 
 void RenderArea::draw_line(double x1, double y1, double x2, double y2){
