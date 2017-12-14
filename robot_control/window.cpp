@@ -49,11 +49,13 @@ void window::on_print_robot_clicked()
 //    double scalar = 1.23;
 //    vec vec3 = (vec1-vec2)/scalar;
 //    vec3.print();
+
     cout << "=======================" << endl;
     robot.print_links();
     cout << "Robot :" << endl;
     robot.print();
     cout << endl;
+
 }
 
 void window::on_btn_for_move_clicked()

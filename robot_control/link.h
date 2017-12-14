@@ -12,6 +12,7 @@ class Link
 public:
 
     Transformation A;
+    Transformation A_global;
     Link();
     Link(double a, double alpha, double d, double theta);
     void print();
@@ -31,7 +32,12 @@ public:
                     double izz);
     void update_dynamics();
     vec force;
+    vec torque;
     void calculate_force(vec force_from_next_link);
+    void calculate_torque(vec force_from_next_link,
+                          vec torque_from_next_link);
+    vec rici;
+    vec rjci;
     double _m = 0;
 
 private:
@@ -50,8 +56,6 @@ private:
     vec _alpha;
     vec _ae;
     vec _ac;
-    vec _f;
-    vec _t;
     inertia _I;
 
 };

@@ -32,6 +32,7 @@ void Robot::update_T(){
     if (n_links>0){
         for (Link* n : links){
             T *= n->A;
+            n->A_global = T;
         }
     }
 }
@@ -72,17 +73,22 @@ vec Robot::joint_vector(int link_index){
 
 vector<vec> Robot::get_joint_forces(){
     vector<vec> force_vectors;
-//    force_vectors.push_back(joint_vector(0));
-//    force_vectors.push_back(links.at(0)->force);
-//    force_vectors.push_back(joint_vector(1));
-//    force_vectors.push_back(links.at(1)->force);
 
     for (int i = 0; i < links.size(); i++){
         force_vectors.push_back(joint_vector(i));
         force_vectors.push_back(links.at(i)->force);
     }
-
     return force_vectors;
+}
+
+vector<vec> Robot::get_joint_torques(){
+    vector<vec> torque_vectors;
+
+    for (int i = 0; i < links.size(); i++){
+        torque_vectors.push_back(joint_vector(i));
+        torque_vectors.push_back(links.at(i)->torque);
+    }
+    return torque_vectors;
 }
 
 void Robot::change_theta(double theta, int link_index){
@@ -107,11 +113,16 @@ void Robot::animate(double percentage){
     }
     // Backward Newton Euler
     vec endEffectorLoad;
+    vec endEffectorTorque;
     for (int i = links.size()-1; i >= 0; i--){
         if (i == (int)links.size()-1){
             links.at(i)->calculate_force(endEffectorLoad);
+            links.at(i)->calculate_torque(endEffectorLoad,
+                                          endEffectorTorque);
         } else {
             links.at(i)->calculate_force(links.at(i+1)->force);
+            links.at(i)->calculate_torque(links.at(i+1)->force,
+                                          links.at(i+1)->torque);
         }
     }
 
@@ -133,3 +144,8 @@ void Robot::set_weight(double m,
     links.at(link_index)->set_weight(m, ixx, ixy, ixz, iyy, iyz, izz);
 
 }
+
+void Robot::print_link_global(int link_index){
+    links.at(link_index)->A_global.print();
+}
+

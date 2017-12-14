@@ -2,6 +2,7 @@
 #define VECTOR_LIB_H
 #include <iostream>
 #include <math.h>
+#include "transformation.h"
 using namespace std;
 
 struct vec
@@ -10,50 +11,11 @@ struct vec
      double y = 0;
      double z = 0;
 
-     vec& operator -(const vec& b)
-     {
-         vec newVec;
-         newVec.x = x-b.x;
-         newVec.y = y-b.y;
-         newVec.z = z-b.z;
-         return newVec;
-     }
-
-     vec& operator +(const vec& b)
-     {
-         vec newVec;
-         newVec.x = x+b.x;
-         newVec.y = y+b.y;
-         newVec.z = z+b.z;
-         return newVec;
-     }
-
-     vec& operator =(const vec& b)
-     {
-         x = b.x;
-         y = b.y;
-         z = b.z;
-         return *this;
-     }
-
-     vec& operator /(const double b)
-     {
-         vec newVec;
-         newVec.x = x/b;
-         newVec.y = y/b;
-         newVec.z = z/b;
-         return newVec;
-     }
-
-     vec& operator *(const double b)
-     {
-         vec newVec;
-         newVec.x = x*b;
-         newVec.y = y*b;
-         newVec.z = z*b;
-         return newVec;
-     }
-
+     vec& operator -(const vec& b);
+     vec& operator +(const vec& b);
+     vec& operator =(const vec& b);
+     vec& operator /(const double b);
+     vec& operator *(const double b);
      void print(){
          cout << "[" << x << ", " << y << ", " << z << "]" << endl;
      }
@@ -62,6 +24,13 @@ struct vec
 struct inertia
 {
      double M[3][3] = {0};
+};
+
+struct rotMat
+{
+    rotMat(Transformation tran);
+    double R[3][3] = {0};
+    vec& operator *(const vec& b);
 };
 
 vec transform_2Dvector(double x, double y, vec startVec, double angle, double scale);

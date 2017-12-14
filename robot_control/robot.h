@@ -20,6 +20,7 @@ public:
     void print_coord();
     vector<double> get_coords();
     vector<vec> get_joint_forces();
+    vector<vec> get_joint_torques();
     vec joint_vector(int link_index);
 
     void change_theta(double theta, int link_index);
@@ -35,6 +36,7 @@ public:
                     double iyz,
                     double izz,
                     int link_index);
+    void print_link_global(int link_index);
 
 private:
     int n_links = 0;

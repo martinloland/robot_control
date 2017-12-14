@@ -83,3 +83,8 @@ void Link::calculate_force(vec force_from_next_link){
     grav.y = -9.81;
     force = force_from_next_link - grav*_m;
 }
+
+void Link::calculate_torque(vec force_from_next_link,
+                      vec torque_from_next_link){
+
+}
