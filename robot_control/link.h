@@ -58,6 +58,9 @@ private:
     vec _ac;
     inertia _I;
 
+    // geometry
+    void calculate_geometry();
+
 };
 
 

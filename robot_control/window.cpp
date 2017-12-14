@@ -56,6 +56,8 @@ void window::on_print_robot_clicked()
     robot.print();
     cout << endl;
 
+    robot.print_link_global(0);
+
 }
 
 void window::on_btn_for_move_clicked()
@@ -79,7 +81,7 @@ void window::on_ui_scale_valueChanged(int value)
 void window::on_btn_add_default_clicked()
 {
     Link* link1 = new Link(1.0, 0, 0, 1.4);
-    Link* link2 = new Link(0.8, 0, 0, -2.0);
+    Link* link2 = new Link(1.0, 0, 0, -2.0);
     link1->theta_start = 1.4;
     link1->theta_end = 0.17;
     link1->_m = 10.0;

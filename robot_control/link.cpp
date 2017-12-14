@@ -86,5 +86,13 @@ void Link::calculate_force(vec force_from_next_link){
 
 void Link::calculate_torque(vec force_from_next_link,
                       vec torque_from_next_link){
+    calculate_geometry();
+}
 
+void Link::calculate_geometry(){
+    vec re(_DHa/2.0, 0.0, 0.0);
+    vec rf(-_DHa/2.0, 0.0, 0.0);
+    rotMat R(A_global);
+    rici = R*re;
+    rjci = R*rf;
 }

@@ -7,18 +7,20 @@ using namespace std;
 
 struct vec
 {
-     double x = 0;
-     double y = 0;
-     double z = 0;
+    double x;
+    double y;
+    double z;
+    vec();
+    vec(double x, double y, double z);
 
-     vec& operator -(const vec& b);
-     vec& operator +(const vec& b);
-     vec& operator =(const vec& b);
-     vec& operator /(const double b);
-     vec& operator *(const double b);
-     void print(){
-         cout << "[" << x << ", " << y << ", " << z << "]" << endl;
-     }
+    vec operator -(const vec& b);
+    vec operator +(const vec& b);
+    vec operator =(const vec& b);
+    vec operator /(const double b);
+    vec operator *(const double b);
+    void print(){
+     cout << "[" << x << ", " << y << ", " << z << "]" << endl;
+    }
 };
 
 struct inertia
@@ -30,7 +32,8 @@ struct rotMat
 {
     rotMat(Transformation tran);
     double R[3][3] = {0};
-    vec& operator *(const vec& b);
+    vec operator *(const vec& b);
+    void print();
 };
 
 vec transform_2Dvector(double x, double y, vec startVec, double angle, double scale);

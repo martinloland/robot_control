@@ -146,6 +146,6 @@ void Robot::set_weight(double m,
 }
 
 void Robot::print_link_global(int link_index){
-    links.at(link_index)->A_global.print();
+    rotMat R(links.at(link_index)->A_global);
+    R.print();
 }
-
