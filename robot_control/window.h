@@ -47,6 +47,7 @@ private:
     Ui::window *ui;
     void start_animation(int forward);
     void update_variables(int link_index);
+    void update_robot();
 };
 
 #endif // WINDOW_H

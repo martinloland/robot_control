@@ -6,7 +6,9 @@ using namespace std;
 
 struct vec
 {
-     double x,y,z = 0;
+     double x = 0;
+     double y = 0;
+     double z = 0;
 
      vec& operator -(const vec& b)
      {

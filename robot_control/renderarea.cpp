@@ -26,15 +26,16 @@ void RenderArea::paintEvent(QPaintEvent *e)
 {
     draw_axis();
     draw_links();
+    draw_joint_forces();
     vec fVec;
     fVec.x = 1;
     fVec.y = 1;
-    draw_force(fVec, fVec);
+//    draw_force(fVec, fVec);
 }
 
 void RenderArea::update_joint_forces(vector<vec>& vectors){
     jointForces.clear();
-    for (vec n : jointForces){
+    for (vec n : vectors){
         jointForces.push_back(n);
     }
     repaint();
@@ -42,7 +43,7 @@ void RenderArea::update_joint_forces(vector<vec>& vectors){
 
 void RenderArea::draw_joint_forces(){
     if (jointForces.size() >= 2){
-        for (int i=0; i<jointForces.size()-2; i+=2){
+        for (int i=0; i<=jointForces.size()-2; i+=2){
             draw_force(jointForces.at(i), jointForces.at(i+1));
         }
     }
@@ -71,8 +72,8 @@ void RenderArea::draw_line(double x1, double y1, double x2, double y2){
                      render_coord(x2,y2));
 }
 
-void RenderArea::draw_force(vec fVec, vec startVec){
-    double k = sqrt(pow(fVec.x,2) + pow(fVec.y,2))/20.0;
+void RenderArea::draw_force(vec startVec, vec fVec){
+    double k = sqrt(pow(fVec.x,2) + pow(fVec.y,2))/2000.0;
     double ang = atan2(fVec.y, fVec.x);
     QPainter painter(this);
     QPen pen(Qt::green, 3, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin);

@@ -80,8 +80,10 @@ void window::on_btn_add_default_clicked()
     Link* link2 = new Link(0.8, 0, 0, -2.0);
     link1->theta_start = 1.4;
     link1->theta_end = 0.17;
+    link1->_m = 10.0;
     link2->theta_start = -2.0;
     link2->theta_end = 1.9;
+    link2->_m = 12.0;
 
     robot.addLink(link1);
     QString qstr = QString::fromStdString(link1->name);
@@ -142,13 +144,18 @@ void window::start_animation(int forward){
             anim_percent = 1.0-((double)clock()-(double)start_time)/(double)tot_anim_time;
         }
         robot.animate(anim_percent);
-        vector<double> coords = robot.get_coords();
-        ui->renderArea->update_links(coords);
-
-        vector<vec> forces = robot.get_joint_forces();
-        ui->renderArea->update_joint_forces(forces);
+        update_robot();
     }
 }
+
+void window::update_robot(){
+    vector<double> coords = robot.get_coords();
+    ui->renderArea->update_links(coords);
+
+    vector<vec> forces = robot.get_joint_forces();
+    ui->renderArea->update_joint_forces(forces);
+}
+
 
 void window::on_links_list_clicked(const QModelIndex &index)
 {
@@ -186,4 +193,5 @@ void window::on_btn_setWeight_clicked()
                     ui->izz->text().toDouble(),
                     link_index);
     }
+    update_robot();
 }

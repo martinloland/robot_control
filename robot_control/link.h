@@ -32,6 +32,7 @@ public:
     void update_dynamics();
     vec force;
     void calculate_force(vec force_from_next_link);
+    double _m = 0;
 
 private:
     // DH parameters
@@ -51,7 +52,6 @@ private:
     vec _ac;
     vec _f;
     vec _t;
-    double _m = 0;
     inertia _I;
 
 };

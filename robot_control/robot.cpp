@@ -60,6 +60,9 @@ vector<double> Robot::get_coords(){
 
 vector<vec> Robot::get_joint_forces(){
     vector<vec> force_vectors;
+    vec origo;
+    force_vectors.push_back(origo);
+    force_vectors.push_back(links.at(0)->force);
     return force_vectors;
 }
 
@@ -90,7 +93,6 @@ void Robot::animate(double percentage){
             links.at(i)->calculate_force(endEffectorLoad);
         } else {
             links.at(i)->calculate_force(links.at(i+1)->force);
-            links.at(i)->force.print();
         }
     }
 
