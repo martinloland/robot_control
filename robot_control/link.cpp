@@ -87,6 +87,8 @@ void Link::calculate_force(vec force_from_next_link){
 void Link::calculate_torque(vec force_from_next_link,
                       vec torque_from_next_link){
     calculate_geometry();
+    torque = torque_from_next_link - force.cross(rici) +
+            force_from_next_link.cross(rjci);
 }
 
 void Link::calculate_geometry(){

@@ -27,11 +27,7 @@ void RenderArea::paintEvent(QPaintEvent *e)
     draw_axis();
     draw_links();
     draw_joint_forces();
-    vec fVec;
-    fVec.x = 1;
-    fVec.y = 1;
-    fVec.z = 1;
-    draw_torque(fVec, fVec);
+    draw_joint_torques();
 }
 
 void RenderArea::update_joint_forces(vector<vec>& vectors){
@@ -42,10 +38,26 @@ void RenderArea::update_joint_forces(vector<vec>& vectors){
     repaint();
 }
 
+void RenderArea::update_joint_torques(vector<vec>& vectors){
+    jointTorques.clear();
+    for (vec n : vectors){
+        jointTorques.push_back(n);
+    }
+    repaint();
+}
+
 void RenderArea::draw_joint_forces(){
     if (jointForces.size() >= 2){
         for (int i=0; i<=jointForces.size()-2; i+=2){
             draw_force(jointForces.at(i), jointForces.at(i+1));
+        }
+    }
+}
+
+void RenderArea::draw_joint_torques(){
+    if (jointTorques.size() >= 2){
+        for (int i=0; i<=jointTorques.size()-2; i+=2){
+            draw_torque(jointTorques.at(i), jointTorques.at(i+1));
         }
     }
 }
@@ -69,12 +81,14 @@ void RenderArea::update_links(vector<double>& coords){
 
 void RenderArea::draw_line(double x1, double y1, double x2, double y2){
     QPainter painter(this);
+    QPen pen(Qt::black, 3, Qt::SolidLine);
+    painter.setPen(pen);
     painter.drawLine(render_coord(x1,y1),
                      render_coord(x2,y2));
 }
 
 void RenderArea::draw_force(vec startVec, vec fVec){
-    double k = sqrt(pow(fVec.x,2) + pow(fVec.y,2))/2000.0;
+    double k = sqrt(pow(fVec.x,2) + pow(fVec.y,2))/200.0;
     double ang = atan2(fVec.y, fVec.x);
     QPainter painter(this);
     QPen pen(Qt::green, 3, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin);
@@ -93,7 +107,7 @@ void RenderArea::draw_force(vec startVec, vec fVec){
 }
 
 void RenderArea::draw_torque(vec startVec, vec tVec){
-    double k = abs(tVec.z/10.0);
+    double k = abs(tVec.z/50.0);
     QPainter painter(this);
     QPen pen(Qt::red, 3, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin);
     painter.setPen(pen);
@@ -121,40 +135,28 @@ void RenderArea::draw_torque(vec startVec, vec tVec){
 
 void RenderArea::draw_axis(){
     QPainter painter(this);
-    int margin=axis_margin;
-    QPoint points[3] = {
-        QPoint(margin, margin),
-        QPoint(margin, render_height-margin),
-        QPoint(render_width-margin, render_height-margin)
-    };
-    painter.drawPolyline(points, 3);
+    QPen blackPen(Qt::black, 2, Qt::SolidLine);
+    QPen grayPen(Qt::gray, 1, Qt::SolidLine);
+    painter.setPen(grayPen);
+    for (int i=-10; i<=10; i++){
+        if (i==0){
+            painter.setPen(blackPen);
+        }
+        painter.drawLine(render_coord(-10.0, i), render_coord(10.0, i));
+        painter.drawLine(render_coord(i, -10.0), render_coord(i, 10.0));
+        painter.setPen(grayPen);
+    }
 
-    brush = QBrush(Qt::SolidPattern);
-    painter.setBrush(brush);
-
-    int width=10;
-    QPoint arrow1[3] = {
-        QPoint(margin-width/2, margin),
-        QPoint(margin, margin-width),
-        QPoint(margin+width/2, margin)
-    };
-    QPoint arrow2[3] = {
-        QPoint(render_width-margin, render_height-margin-width/2),
-        QPoint(render_width-margin+width, render_height-margin),
-        QPoint(render_width-margin, render_height-margin+width/2)
-    };
-    painter.drawPolygon(arrow1, 3);
-    painter.drawPolygon(arrow2, 3);
 }
 
 QPoint RenderArea::render_coord(double x, double y){
-    return QPoint(x/scaling+axis_margin,
-                  render_height-y/scaling-axis_margin);
+    return QPoint(x/scaling+x_margin,
+                  render_height-y/scaling-y_margin);
 }
 
 coord2D RenderArea::real_coord(double x, double y){
     coord2D cor;
-    cor.x = (x-axis_margin)*scaling;
-    cor.y = (render_height-y-axis_margin)*scaling;
+    cor.x = (x-x_margin)*scaling;
+    cor.y = (render_height-y-y_margin)*scaling;
     return cor;
 }

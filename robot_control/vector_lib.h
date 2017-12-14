@@ -13,6 +13,8 @@ struct vec
     vec();
     vec(double x, double y, double z);
 
+
+    vec cross(const vec& b);
     vec operator -(const vec& b);
     vec operator +(const vec& b);
     vec operator =(const vec& b);

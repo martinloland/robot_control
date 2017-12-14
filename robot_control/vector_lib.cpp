@@ -56,6 +56,14 @@ vec vec::operator *(const double b)
     return newVec;
 }
 
+vec vec::cross(const vec& b){
+    vec newVec;
+    newVec.x = this->y*b.z - this->z*b.y;
+    newVec.y = this->z*b.x - this->x*b.z;
+    newVec.z = this->x*b.y - this->y*b.x;
+    return newVec;
+}
+
 vec transform_2Dvector(double x, double y, vec startVec, double angle, double scale){
     vec newVec;
     newVec.z =  startVec.z;

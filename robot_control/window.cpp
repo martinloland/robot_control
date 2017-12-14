@@ -84,10 +84,10 @@ void window::on_btn_add_default_clicked()
     Link* link2 = new Link(1.0, 0, 0, -2.0);
     link1->theta_start = 1.4;
     link1->theta_end = 0.17;
-    link1->_m = 10.0;
+    link1->_m = 1.2;
     link2->theta_start = -2.0;
     link2->theta_end = 1.9;
-    link2->_m = 12.0;
+    link2->_m = 0.8;
 
     robot.addLink(link1);
     QString qstr = QString::fromStdString(link1->name);
@@ -158,6 +158,9 @@ void window::update_robot(){
 
     vector<vec> forces = robot.get_joint_forces();
     ui->renderArea->update_joint_forces(forces);
+
+    vector<vec> torques = robot.get_joint_torques();
+    ui->renderArea->update_joint_torques(torques);
 }
 
 
