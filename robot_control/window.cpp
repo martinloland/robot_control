@@ -67,9 +67,8 @@ void window::on_btn_for_move_clicked()
     if (link_index >=0){
         robot.change_theta(theta, link_index);
     }
-    vector<double> coords = robot.get_coords();
-    ui->renderArea->update_links(coords);
-    ui->for_theta_sli->setValue(ui->for_theta->text().toDouble());
+    robot.newtonEuler();
+    update_robot();
 }
 
 void window::on_ui_scale_valueChanged(int value)

@@ -111,6 +111,10 @@ void Robot::animate(double percentage){
         n->animate(percentage);
         n->update_dynamics();
     }
+    newtonEuler();
+}
+
+void Robot::newtonEuler(){
     // Backward Newton Euler
     vec endEffectorLoad;
     vec endEffectorTorque;
