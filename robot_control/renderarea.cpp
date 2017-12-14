@@ -30,7 +30,8 @@ void RenderArea::paintEvent(QPaintEvent *e)
     vec fVec;
     fVec.x = 1;
     fVec.y = 1;
-//    draw_force(fVec, fVec);
+    fVec.z = 1;
+    draw_torque(fVec, fVec);
 }
 
 void RenderArea::update_joint_forces(vector<vec>& vectors){
@@ -89,6 +90,33 @@ void RenderArea::draw_force(vec startVec, vec fVec){
                      render_coord(p3.x, p3.y));
     painter.drawLine(render_coord(p2.x, p2.y),
                      render_coord(p4.x, p4.y));
+}
+
+void RenderArea::draw_torque(vec startVec, vec tVec){
+    double k = abs(tVec.z/10.0);
+    QPainter painter(this);
+    QPen pen(Qt::red, 3, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin);
+    painter.setPen(pen);
+    vec p1, p2, p3;
+    vec tl = transform_2Dvector(-1.0, 1.0, startVec, 0.0, k);
+    vec br = transform_2Dvector(1.0, -1.0, startVec, 0.0, k);
+    p1 = transform_2Dvector(0.3, 1.3, startVec, 0.0, k);
+    p2 = transform_2Dvector(0.0, 1.0, startVec, 0.0, k);
+    p3 = transform_2Dvector(0.3, 0.7, startVec, 0.0, k);
+    QRectF rect(render_coord(tl.x, tl.y), render_coord(br.x, br.y));
+    int startAngle = 180 * 16;
+    int spanAngle = 270 * 16;
+    if (tVec.z < 0){
+        startAngle = 90 * 16;
+        spanAngle = 270 * 16;
+        p1 = transform_2Dvector(-0.3, 1.3, startVec, 0.0, k);
+        p3 = transform_2Dvector(-0.3, 0.7, startVec, 0.0, k);
+    }
+    painter.drawLine(render_coord(p1.x, p1.y),
+                     render_coord(p2.x, p2.y));
+    painter.drawLine(render_coord(p2.x, p2.y),
+                     render_coord(p3.x, p3.y));
+    painter.drawArc(rect, startAngle, spanAngle);
 }
 
 void RenderArea::draw_axis(){

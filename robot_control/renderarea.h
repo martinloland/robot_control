@@ -17,8 +17,6 @@ class RenderArea : public QWidget
 
 public:
     explicit RenderArea(QWidget *parent = nullptr);
-    void draw_line(double x1, double y1, double x2, double y2);
-    void draw_force(vec startVec, vec fVec);
     void update_links(vector<double>& coords);
     void update_joint_forces(vector<vec>& vectors);
     double scaling = 1.0/300.0;
@@ -42,6 +40,9 @@ protected:
 
 private:
 
+    void draw_line(double x1, double y1, double x2, double y2);
+    void draw_force(vec startVec, vec fVec);
+    void draw_torque(vec startVec, vec tVec);
     QBrush brush;
 
 };

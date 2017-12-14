@@ -58,11 +58,30 @@ vector<double> Robot::get_coords(){
     return coords;
 }
 
+vec Robot::joint_vector(int link_index){
+    Transformation to_joint_T;
+    to_joint_T.identity();
+    for (int i = 0; i < link_index; i++){
+        to_joint_T *= links.at(i)->A;
+    }
+    vec to_joint_vec;
+    to_joint_vec.x = to_joint_T.T[0][3];
+    to_joint_vec.y = to_joint_T.T[1][3];
+    return to_joint_vec;
+}
+
 vector<vec> Robot::get_joint_forces(){
     vector<vec> force_vectors;
-    vec origo;
-    force_vectors.push_back(origo);
-    force_vectors.push_back(links.at(0)->force);
+//    force_vectors.push_back(joint_vector(0));
+//    force_vectors.push_back(links.at(0)->force);
+//    force_vectors.push_back(joint_vector(1));
+//    force_vectors.push_back(links.at(1)->force);
+
+    for (int i = 0; i < links.size(); i++){
+        force_vectors.push_back(joint_vector(i));
+        force_vectors.push_back(links.at(i)->force);
+    }
+
     return force_vectors;
 }
 
