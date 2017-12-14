@@ -18,8 +18,31 @@ void RenderArea::resizeEvent(QResizeEvent *event)
 }
 
 void RenderArea::mousePressEvent(QMouseEvent *event){
-    coord2D real = real_coord(event->x(), event->y());
-    cout << "(" << real.x << ", " << real.y << ")" << endl;
+    m_lastPos = event->pos();
+    if (event->buttons() & Qt::LeftButton) {
+        coord2D real = real_coord(event->x(), event->y());
+        cout << "(" << real.x << ", " << real.y << ")" << endl;
+    }
+}
+
+void RenderArea::mouseMoveEvent(QMouseEvent *event){
+    int dx = event->x() - m_lastPos.x();
+    int dy = event->y() - m_lastPos.y();
+    if (event->buttons() & Qt::MiddleButton) {
+        x_margin += dx;
+        y_margin -= dy;
+        update();
+    }
+    m_lastPos = event->pos();
+}
+
+void RenderArea::wheelEvent(QWheelEvent *event)
+{
+    int numDegrees = event->delta();
+    scale += numDegrees/2;
+    double num = pow(2,(double)scale/400.0)*178.0;
+    scaling = 1.0/num;
+    update();
 }
 
 void RenderArea::paintEvent(QPaintEvent *e)
@@ -135,8 +158,8 @@ void RenderArea::draw_torque(vec startVec, vec tVec){
 
 void RenderArea::draw_axis(){
     QPainter painter(this);
-    QPen blackPen(Qt::black, 2, Qt::SolidLine);
-    QPen grayPen(Qt::gray, 1, Qt::SolidLine);
+    QPen blackPen(Qt::black, 1, Qt::SolidLine);
+    QPen grayPen(Qt::gray, 1, Qt::DashLine);
     painter.setPen(grayPen);
     for (int i=-10; i<=10; i++){
         if (i==0){

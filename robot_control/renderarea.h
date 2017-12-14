@@ -20,12 +20,15 @@ public:
     void update_links(vector<double>& coords);
     void update_joint_forces(vector<vec>& vectors);
     void update_joint_torques(vector<vec>& vectors);
+    int scale = 300;
     double scaling = 1.0/300.0;
 
 protected:
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
     void draw_axis();
     QPoint render_coord(double x, double y);
@@ -48,6 +51,8 @@ private:
     void draw_force(vec startVec, vec fVec);
     void draw_torque(vec startVec, vec tVec);
     QBrush brush;
+
+    QPoint m_lastPos;
 
 };
 
