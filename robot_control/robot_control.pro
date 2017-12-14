@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     link.cpp \
     transformation.cpp \
     window.cpp \
-    renderarea.cpp
+    renderarea.cpp \
+    vector_lib.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings

@@ -26,7 +26,10 @@ void RenderArea::paintEvent(QPaintEvent *e)
 {
     draw_axis();
     draw_links();
-    //draw_arrow(0.0, 0.0, 0.0, 0.0, Qt::green);
+    vec fVec;
+    fVec.x = 1;
+    fVec.y = 1;
+    draw_force(fVec, fVec);
 }
 
 void RenderArea::draw_links(){
@@ -52,13 +55,23 @@ void RenderArea::draw_line(double x1, double y1, double x2, double y2){
                      render_coord(x2,y2));
 }
 
-void RenderArea::draw_arrow(double x, double y, double angle,
-                            double magnitude, Qt::GlobalColor color){
+void RenderArea::draw_force(vec fVec, vec startVec){
+    double k = sqrt(pow(fVec.x,2) + pow(fVec.y,2));
+    double ang = atan2(fVec.y, fVec.x);
     QPainter painter(this);
-    QPen pen(color, 3, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin);
+    QPen pen(Qt::green, 3, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin);
     painter.setPen(pen);
-    painter.drawLine(render_coord(0,0),
-            render_coord(2,2));
+    vec p1 = transform_2Dvector(0.0, 0.0, startVec, ang, k);
+    vec p2 = transform_2Dvector(3.0, 0.0, startVec, ang, k);
+    vec p3 = transform_2Dvector(2.5, 0.5, startVec, ang, k);
+    vec p4 = transform_2Dvector(2.5, -0.5, startVec, ang, k);
+
+    painter.drawLine(render_coord(p1.x, p1.y),
+                     render_coord(p2.x, p2.y));
+    painter.drawLine(render_coord(p2.x, p2.y),
+                     render_coord(p3.x, p3.y));
+    painter.drawLine(render_coord(p2.x, p2.y),
+                     render_coord(p4.x, p4.y));
 }
 
 void RenderArea::draw_axis(){

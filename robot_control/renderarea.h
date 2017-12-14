@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPainter>
+#include "vector_lib.h"
 using namespace std;
 
 struct coord2D{
@@ -17,8 +18,7 @@ class RenderArea : public QWidget
 public:
     explicit RenderArea(QWidget *parent = nullptr);
     void draw_line(double x1, double y1, double x2, double y2);
-    void draw_arrow(double x, double y, double angle,
-                    double magnitude, Qt::GlobalColor color);
+    void draw_force(vec fVec, vec startVec);
     void update_links(vector<double>& coords);
     double scaling = 1.0/300.0;
 
