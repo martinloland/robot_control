@@ -29,6 +29,9 @@ public:
                     double iyy,
                     double iyz,
                     double izz);
+    void update_dynamics();
+    vec force;
+    void calculate_force(vec force_from_next_link);
 
 private:
     // DH parameters
@@ -36,11 +39,13 @@ private:
     double _DHalpha;
     double _DHd;
     double _theta;
+    double _theta_prev;
     void update_A();
 
     // dynamic properties
-    int last_calc;
+    int last_update = 0;
     vec _omega;
+    vec _omega_prev;
     vec _alpha;
     vec _ae;
     vec _ac;

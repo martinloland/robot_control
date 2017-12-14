@@ -67,3 +67,19 @@ void Link::set_weight(double m,
          ixy, iyy, iyz,
          ixz, iyz, izz};
 }
+
+void Link::update_dynamics(){
+    double delta_time = (double)(clock()-last_update)/1000.0;
+    _omega.z = (_theta - _theta_prev)/delta_time;
+    _alpha = (_omega - _omega_prev)/delta_time;
+
+    _theta_prev = _theta;
+    last_update = clock();
+}
+
+void Link::calculate_force(vec force_from_next_link){
+    vec grav;
+    grav.x = 0.0;
+    grav.y = -9.81;
+    force = force_from_next_link - grav*_m;
+}

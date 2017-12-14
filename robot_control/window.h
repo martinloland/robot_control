@@ -41,7 +41,7 @@ private slots:
 
     void on_links_list_clicked(const QModelIndex &index);
 
-    void on_pushButton_clicked();
+    void on_btn_setWeight_clicked();
 
 private:
     Ui::window *ui;

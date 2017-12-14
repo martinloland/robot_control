@@ -20,6 +20,7 @@ public:
     void draw_line(double x1, double y1, double x2, double y2);
     void draw_force(vec fVec, vec startVec);
     void update_links(vector<double>& coords);
+    void update_joint_forces(vector<vec>& vectors);
     double scaling = 1.0/300.0;
 
 protected:
@@ -31,7 +32,9 @@ protected:
     QPoint render_coord(double x, double y);
     coord2D real_coord(double x, double y);
     vector<double> robotLinks;
+    vector<vec> jointForces;
     void draw_links();
+    void draw_joint_forces();
 
     int render_width;
     int render_height;

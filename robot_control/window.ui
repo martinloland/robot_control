@@ -362,7 +362,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btn_setWeight">
         <property name="text">
          <string>Set weight</string>
         </property>

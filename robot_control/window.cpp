@@ -3,6 +3,7 @@
 #include <iostream>
 #include <time.h>
 #include "link.h"
+#include "vector_lib.h"
 using namespace std;
 
 window::window(QWidget *parent) :
@@ -37,6 +38,17 @@ void window::on_btn_add_link_clicked()
 
 void window::on_print_robot_clicked()
 {    
+//    vec vec1;
+//    vec1.x = 2.0;
+//    vec1.y = 3.0;
+//    vec1.z = 4.0;
+//    vec vec2;
+//    vec2.x = 1.0;
+//    vec2.y = 1.1;
+//    vec2.z = 1.3;
+//    double scalar = 1.23;
+//    vec vec3 = (vec1-vec2)/scalar;
+//    vec3.print();
     cout << "=======================" << endl;
     robot.print_links();
     cout << "Robot :" << endl;
@@ -132,6 +144,9 @@ void window::start_animation(int forward){
         robot.animate(anim_percent);
         vector<double> coords = robot.get_coords();
         ui->renderArea->update_links(coords);
+
+        vector<vec> forces = robot.get_joint_forces();
+        ui->renderArea->update_joint_forces(forces);
     }
 }
 
@@ -157,7 +172,7 @@ void window::update_variables(int link_index){
     ui->izz->setText(QString::number(values["izz"]));
 }
 
-void window::on_pushButton_clicked()
+void window::on_btn_setWeight_clicked()
 {
     int link_index = ui->links_list->currentRow();
     if (link_index >= 0){

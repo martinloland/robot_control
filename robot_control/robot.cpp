@@ -58,6 +58,11 @@ vector<double> Robot::get_coords(){
     return coords;
 }
 
+vector<vec> Robot::get_joint_forces(){
+    vector<vec> force_vectors;
+    return force_vectors;
+}
+
 void Robot::change_theta(double theta, int link_index){
     links.at(link_index)->change_theta(theta);
     update_T();
@@ -76,7 +81,19 @@ void Robot::set_theta_end(double theta, int link_index){
 void Robot::animate(double percentage){
     for (Link* n : links){
         n->animate(percentage);
+        n->update_dynamics();
     }
+    // Backward Newton Euler
+    vec endEffectorLoad;
+    for (int i = links.size()-1; i >= 0; i--){
+        if (i == (int)links.size()-1){
+            links.at(i)->calculate_force(endEffectorLoad);
+        } else {
+            links.at(i)->calculate_force(links.at(i+1)->force);
+            links.at(i)->force.print();
+        }
+    }
+
     update_T();
 }
 
