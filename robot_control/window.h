@@ -48,6 +48,7 @@ private:
     void start_animation(int forward);
     void update_variables(int link_index);
     void update_robot();
+    void update_table_text();
 };
 
 #endif // WINDOW_H

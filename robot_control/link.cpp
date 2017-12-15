@@ -52,6 +52,12 @@ map<string, double> Link::getLinkMap(){
     values["iyy"] = _I.M[1][1];
     values["iyz"] = _I.M[1][2];
     values["izz"] = _I.M[2][2];
+
+    values["force"] = force.y;
+    values["torque"] = torque.z;
+    values["omega"] = _omega.z;
+    values["alpha"] = _alpha.z;
+
     return values;
 }
 

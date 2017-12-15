@@ -67,7 +67,6 @@ void window::on_btn_for_move_clicked()
     if (link_index >=0){
         robot.change_theta(theta, link_index);
     }
-    robot.newtonEuler();
     update_robot();
 }
 
@@ -152,6 +151,7 @@ void window::start_animation(int forward){
 }
 
 void window::update_robot(){
+    robot.newtonEuler();
     vector<double> coords = robot.get_coords();
     ui->renderArea->update_links(coords);
 
@@ -160,12 +160,33 @@ void window::update_robot(){
 
     vector<vec> torques = robot.get_joint_torques();
     ui->renderArea->update_joint_torques(torques);
+
+    update_table_text();
 }
 
 
 void window::on_links_list_clicked(const QModelIndex &index)
 {
     update_variables(index.row());
+}
+
+void window::update_table_text(){
+    char buf[256];
+    ui->table->clear();
+    sprintf(buf, "%-6s %-9s %-9s %-9s %-9s %-9s",
+            "Link", "Force", "Torque", "Theta", "Velocity", "Accel.");
+    ui->table->append(QString(buf));
+
+
+    for (int i = 0; i < robot.n_links; i++){
+        char buf2[256];
+        map<string, double> val;
+        val = robot.get_link_map(i);
+        sprintf(buf2, "%-6d %9.2f %9.2f %9.2f %9.2f %9.2f",
+                i+1, val["force"], val["torque"],
+                val["theta"], val["omega"], val["alpha"]);
+        ui->table->append(QString(buf2));
+    }
 }
 
 void window::update_variables(int link_index){
