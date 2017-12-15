@@ -42,8 +42,8 @@ protected:
 
     int render_width;
     int render_height;
-    int x_margin = 100;
-    int y_margin = 100;
+    int x_margin = 200;
+    int y_margin = 200;
 
 private:
 

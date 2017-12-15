@@ -79,6 +79,7 @@ void Link::update_dynamics(){
     _omega.z = (_theta - _theta_prev)/delta_time;
     _alpha = (_omega - _omega_prev)/delta_time;
     _theta_prev = _theta;
+    _omega_prev = _omega;
     last_update = clock();
 }
 

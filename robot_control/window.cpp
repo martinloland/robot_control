@@ -37,27 +37,12 @@ void window::on_btn_add_link_clicked()
 }
 
 void window::on_print_robot_clicked()
-{    
-//    vec vec1;
-//    vec1.x = 2.0;
-//    vec1.y = 3.0;
-//    vec1.z = 4.0;
-//    vec vec2;
-//    vec2.x = 1.0;
-//    vec2.y = 1.1;
-//    vec2.z = 1.3;
-//    double scalar = 1.23;
-//    vec vec3 = (vec1-vec2)/scalar;
-//    vec3.print();
-
+{
     cout << "=======================" << endl;
     robot.print_links();
     cout << "Robot :" << endl;
     robot.print();
     cout << endl;
-
-    robot.print_link_global(0);
-
 }
 
 void window::on_btn_for_move_clicked()
@@ -79,13 +64,17 @@ void window::on_ui_scale_valueChanged(int value)
 void window::on_btn_add_default_clicked()
 {
     Link* link1 = new Link(1.0, 0, 0, 1.4);
-    Link* link2 = new Link(1.0, 0, 0, -2.0);
+    Link* link2 = new Link(0.8, 0, 0, -2.0);
+    Link* link3 = new Link(0.5, 0, 0, -1.92);
     link1->theta_start = 1.4;
     link1->theta_end = 0.17;
     link1->_m = 1.2;
     link2->theta_start = -2.0;
     link2->theta_end = 1.9;
     link2->_m = 0.8;
+    link3->theta_start = -1.92;
+    link3->theta_end = 1.0;
+    link3->_m = 0.6;
 
     robot.addLink(link1);
     QString qstr = QString::fromStdString(link1->name);
@@ -95,8 +84,13 @@ void window::on_btn_add_default_clicked()
     QString qstr2 = QString::fromStdString(link2->name);
     ui->links_list->addItem(qstr2);
 
+    robot.addLink(link3);
+    QString qstr3 = QString::fromStdString(link3->name);
+    ui->links_list->addItem(qstr3);
+
     vector<double> coords = robot.get_coords();
     ui->renderArea->update_links(coords);
+    update_robot();
 }
 
 void window::on_for_theta_sli_valueChanged(int value)
@@ -179,14 +173,16 @@ void window::update_table_text(){
 
 
     for (int i = 0; i < robot.n_links; i++){
-        char buf2[256];
         map<string, double> val;
         val = robot.get_link_map(i);
-        sprintf(buf2, "%-6d %9.2f %9.2f %9.2f %9.2f %9.2f",
+        sprintf(buf, "%-6d %9.2f %9.2f %9.2f %9.2f %9.2f",
                 i+1, val["force"], val["torque"],
                 val["theta"], val["omega"], val["alpha"]);
-        ui->table->append(QString(buf2));
+        ui->table->append(QString(buf));
     }
+    sprintf(buf, "%-6s %-9s %-9s %-9s %-9s %-9s",
+            "#", "N", "Nm", "rad", "rad/s", "rad/s^2");
+    ui->table->append(QString(buf));
 }
 
 void window::update_variables(int link_index){

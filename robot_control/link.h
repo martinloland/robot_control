@@ -38,7 +38,7 @@ public:
                           vec torque_from_next_link);
     vec rici;
     vec rjci;
-    double _m = 0;
+    double _m = 0.8;
 
 private:
     // DH parameters

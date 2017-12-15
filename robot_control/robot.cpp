@@ -98,12 +98,10 @@ void Robot::change_theta(double theta, int link_index){
 
 void Robot::set_theta_start(double theta, int link_index){
     links.at(link_index)->theta_start = theta;
-    cout << links.at(link_index)->theta_start << endl;
 }
 
 void Robot::set_theta_end(double theta, int link_index){
     links.at(link_index)->theta_end = theta;
-    cout << links.at(link_index)->theta_end << endl;
 }
 
 void Robot::animate(double percentage){
