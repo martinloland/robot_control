@@ -51,6 +51,7 @@ void RenderArea::paintEvent(QPaintEvent *e)
     draw_links();
     draw_joint_forces();
     draw_joint_torques();
+    draw_link_velocities();
 }
 
 void RenderArea::update_joint_forces(vector<vec>& vectors){
@@ -58,7 +59,6 @@ void RenderArea::update_joint_forces(vector<vec>& vectors){
     for (vec n : vectors){
         jointForces.push_back(n);
     }
-    repaint();
 }
 
 void RenderArea::update_joint_torques(vector<vec>& vectors){
@@ -66,7 +66,13 @@ void RenderArea::update_joint_torques(vector<vec>& vectors){
     for (vec n : vectors){
         jointTorques.push_back(n);
     }
-    repaint();
+}
+
+void RenderArea::update_link_velocities(vector<vec>& vectors){
+    linkVelocities.clear();
+    for (vec n : vectors){
+        linkVelocities.push_back(n);
+    }
 }
 
 void RenderArea::draw_joint_forces(){
@@ -81,6 +87,14 @@ void RenderArea::draw_joint_torques(){
     if (jointTorques.size() >= 2){
         for (int i=0; i<=jointTorques.size()-2; i+=2){
             draw_torque(jointTorques.at(i), jointTorques.at(i+1));
+        }
+    }
+}
+
+void RenderArea::draw_link_velocities(){
+    if (linkVelocities.size() >= 2){
+        for (int i=0; i<=linkVelocities.size()-2; i+=2){
+            draw_force(linkVelocities.at(i), linkVelocities.at(i+1));
         }
     }
 }

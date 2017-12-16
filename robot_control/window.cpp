@@ -161,6 +161,11 @@ void window::update_robot(int inc_dynamic_eff){
     vector<vec> torques = robot.get_joint_torques();
     ui->renderArea->update_joint_torques(torques);
 
+    vector<vec> velocities = robot.get_link_velocities();
+    ui->renderArea->update_link_velocities(velocities);
+
+    ui->renderArea->repaint();
+
     update_table_text();
 }
 

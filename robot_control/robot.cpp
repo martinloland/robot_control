@@ -29,10 +29,15 @@ void Robot::addLink(Link* link){
 
 void Robot::update_T(){
     T.identity();
+    vec prev_link;
     if (n_links>0){
         for (Link* n : links){
             T *= n->A;
             n->A_global = T;
+            n->ps = prev_link;
+            prev_link.x = T.T[0][3];
+            prev_link.y = T.T[1][3];
+            prev_link.z = T.T[2][3];
         }
     }
 }
@@ -59,24 +64,22 @@ vector<double> Robot::get_coords(){
     return coords;
 }
 
-vec Robot::joint_vector(int link_index){
-    Transformation to_joint_T;
-    to_joint_T.identity();
-    for (int i = 0; i < link_index; i++){
-        to_joint_T *= links.at(i)->A;
-    }
-    vec to_joint_vec;
-    to_joint_vec.x = to_joint_T.T[0][3];
-    to_joint_vec.y = to_joint_T.T[1][3];
-    return to_joint_vec;
-}
+//vec Robot::joint_vector(int link_index){
+//    Transformation to_joint_T;
+//    to_joint_T.identity();
+//    for (int i = 0; i < link_index; i++){
+//        to_joint_T *= links.at(i)->A;
+//    }
+//    vec to_joint_vec(to_joint_T);
+//    cout << "now here" << endl;
+//    return to_joint_vec;
+//}
 
 vector<vec> Robot::get_joint_forces(){
     vector<vec> force_vectors;
 
     for (int i = 0; i < links.size(); i++){
-//        force_vectors.push_back(joint_vector(i));
-        force_vectors.push_back(links.at(i)->pe);
+        force_vectors.push_back(links.at(i)->ps);
         force_vectors.push_back(links.at(i)->force);
     }
     return force_vectors;
@@ -86,10 +89,20 @@ vector<vec> Robot::get_joint_torques(){
     vector<vec> torque_vectors;
 
     for (int i = 0; i < links.size(); i++){
-        torque_vectors.push_back(joint_vector(i));
+        torque_vectors.push_back(links.at(i)->ps);
         torque_vectors.push_back(links.at(i)->torque);
     }
     return torque_vectors;
+}
+
+vector<vec> Robot::get_link_velocities(){
+    vector<vec> link_velocities;
+
+    for (int i = 0; i < links.size(); i++){
+        link_velocities.push_back(links.at(i)->pc);
+        link_velocities.push_back(links.at(i)->vc);
+    }
+    return link_velocities;
 }
 
 void Robot::change_theta(double theta, int link_index){

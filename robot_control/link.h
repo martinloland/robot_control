@@ -22,6 +22,9 @@ public:
     vec torque;
     vec rici;
     vec rjci;
+    vec ps;
+    vec pc;
+    vec vc;
 
     string name;
     double q_start = 0;
@@ -37,7 +40,6 @@ public:
 
     void newton_euler_forward();
     void newton_euler_backward(vec f_j_link, vec t_j_link, int inc_dynamic_eff);
-    vec pe;
 
 private:
     void update_A();
@@ -65,10 +67,9 @@ private:
     vec alpha;
     vec g;
     // Linear position, velocity and acceleration
-    vec pc;
     vec pc_prev;
+    vec pe;
     vec pe_prev;
-    vec vc;
     vec vc_prev;
     vec ve;
     vec ve_prev;

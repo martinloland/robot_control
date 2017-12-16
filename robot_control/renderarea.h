@@ -20,6 +20,7 @@ public:
     void update_links(vector<double>& coords);
     void update_joint_forces(vector<vec>& vectors);
     void update_joint_torques(vector<vec>& vectors);
+    void update_link_velocities(vector<vec>& vectors);
     int scale = 300;
     double scaling = 1.0/300.0;
 
@@ -36,9 +37,11 @@ protected:
     vector<double> robotLinks;
     vector<vec> jointForces;
     vector<vec> jointTorques;
+    vector<vec> linkVelocities;
     void draw_links();
     void draw_joint_forces();
     void draw_joint_torques();
+    void draw_link_velocities();
 
     int render_width;
     int render_height;
