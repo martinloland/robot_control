@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include "link.h"
 #include "vector_lib.h"
+#include <fstream>
 
 using namespace std;
 
@@ -131,10 +132,18 @@ void window::on_animBack_clicked()
 }
 
 void window::start_animation(int forward){
+    ofstream myfile;
+    char buf[256];
+    char filename[100];
     int tot_anim_time = ui->anim_time->text().toDouble()*1000;
     int start_time = clock();
     double anim_percent = 0.0;
-    double frames;
+    double frames;    
+    sprintf(filename, "../output/%d.csv",tot_anim_time);
+    myfile.open (filename);
+//    myfile << "total time: " << tot_anim_time << " ms\n";
+    myfile << "per,q,qd,qdd,f,t\n";
+
     while (clock()-start_time < tot_anim_time){
         if (forward){
             anim_percent = ((double)clock()-(double)start_time)/(double)tot_anim_time;
@@ -143,13 +152,21 @@ void window::start_animation(int forward){
         }
         robot.animate(anim_percent);
         update_robot(ui->incDynEff->isChecked());
-        Sleep(40);
+        Sleep(20);
+
+        map<string, double> val = robot.get_link_map(0);
+        sprintf(buf, "%f,%f,%f,%f,%f,%f\n",anim_percent,val["theta"],
+                val["omega"],val["alpha"],val["force"],val["torque"]);
+        myfile << buf;
+
         frames++;
     }
+    // smooth out
     for(int i=1; i <4; i++){
         robot.animate(forward);
         update_robot(ui->incDynEff->isChecked());
     }
+    myfile.close();
     cout << "fps:" << (frames / (double)tot_anim_time) * 1000.0 << endl;
 }
 
