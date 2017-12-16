@@ -62,6 +62,7 @@ private:
     vec omega;
     vec omega_prev;
     vec alpha;
+    vec g;
     // Linear position, velocity and acceleration
     vec pc;
     vec pc_prev;

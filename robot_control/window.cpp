@@ -2,8 +2,10 @@
 #include "ui_window.h"
 #include <iostream>
 #include <time.h>
+#include <Windows.h>
 #include "link.h"
 #include "vector_lib.h"
+
 using namespace std;
 
 window::window(QWidget *parent) :
@@ -141,6 +143,7 @@ void window::start_animation(int forward){
         }
         robot.animate(anim_percent);
         update_robot();
+        Sleep(30);
     }
 }
 

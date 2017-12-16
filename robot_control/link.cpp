@@ -5,6 +5,7 @@ using namespace std;
 
 Link::Link()
 {
+    g.y = -9.81;
 }
 
 Link::Link(double a, double alpha, double d, double theta){
@@ -13,6 +14,7 @@ Link::Link(double a, double alpha, double d, double theta){
     DHd = d;
     q = theta;
     update_A();
+    g.y = -9.81;
 }
 
 void Link::print(){
@@ -55,7 +57,7 @@ map<string, double> Link::getLinkMap(){
     values["pcx"] = pc.x;
     values["pcy"] = pc.y;
 
-//    values["pd"] = sqrt(pow(pd.x,2)+pow(pd.y,2));
+    //values["pd"] = sqrt(pow(pd.x,2)+pow(pd.y,2));
 
     return values;
 }
@@ -92,6 +94,7 @@ void Link::newton_euler_backward(vec f_j_link, vec t_j_link){
 void Link::calculate_momentum(){
     // rather change in momentum, therefore denoted d
     pd = ac*m;
+    pd.print();
 }
 
 void Link::calculate_rotation(){
@@ -124,10 +127,7 @@ void Link::calculate_translation(){
 }
 
 void Link::calculate_force(vec f_j_link){
-    vec grav;
-    grav.x = 0.0;
-    grav.y = -9.81;
-    force = f_j_link - grav*m;
+    force = pd + f_j_link - g*m;
 }
 
 void Link::calculate_torque(vec f_j_link, vec t_j_link){
