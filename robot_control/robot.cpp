@@ -24,22 +24,7 @@ void Robot::addLink(Link* link){
     link->name = ss.str();
     links.push_back(link);
     n_links += 1;
-    update_T();
-}
-
-void Robot::update_T(){
-    T.identity();
-    vec prev_link;
-    if (n_links>0){
-        for (Link* n : links){
-            T *= n->A;
-            n->A_global = T;
-            n->ps = prev_link;
-            prev_link.x = T.T[0][3];
-            prev_link.y = T.T[1][3];
-            prev_link.z = T.T[2][3];
-        }
-    }
+    newtonEuler(0);
 }
 
 void Robot::print_links(){
@@ -63,17 +48,6 @@ vector<double> Robot::get_coords(){
     }
     return coords;
 }
-
-//vec Robot::joint_vector(int link_index){
-//    Transformation to_joint_T;
-//    to_joint_T.identity();
-//    for (int i = 0; i < link_index; i++){
-//        to_joint_T *= links.at(i)->A;
-//    }
-//    vec to_joint_vec(to_joint_T);
-//    cout << "now here" << endl;
-//    return to_joint_vec;
-//}
 
 vector<vec> Robot::get_joint_forces(){
     vector<vec> force_vectors;
@@ -107,7 +81,7 @@ vector<vec> Robot::get_link_velocities(){
 
 void Robot::change_theta(double theta, int link_index){
     links.at(link_index)->change_theta(theta);
-    update_T();
+    newtonEuler(0);
 }
 
 void Robot::set_theta_start(double theta, int link_index){
@@ -126,8 +100,18 @@ void Robot::animate(double percentage){
 
 void Robot::newtonEuler(int inc_dynamic_eff){
     // Forward Newton Euler
+
+    T.identity();
+    vec prev_link;
     for (Link* n : links){
         n->newton_euler_forward();
+        T *= n->A;
+        n->A_global = T;
+        n->ps = prev_link;
+        n->calculate_translation();
+        prev_link.x = T.T[0][3];
+        prev_link.y = T.T[1][3];
+        prev_link.z = T.T[2][3];
     }
 
     // Backward Newton Euler
@@ -144,7 +128,6 @@ void Robot::newtonEuler(int inc_dynamic_eff){
                                                inc_dynamic_eff);
         }
     }
-    update_T();
 }
 
 map<string, double> Robot::get_link_map(int link_index){

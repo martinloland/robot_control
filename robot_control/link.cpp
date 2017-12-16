@@ -79,7 +79,7 @@ void Link::set_weight(double mass,
 
 void Link::newton_euler_forward(){
     delta_time = (double)(clock()-last_update)/CLOCKS_PER_SEC;
-    calculate_translation();
+//    calculate_translation();
     calculate_rotation();
 }
 
@@ -113,7 +113,7 @@ void Link::calculate_translation(){
     rotMat R(A_global);
     rici = R*re;
     rjci = R*rf;
-    pc = vec(A_global) + rjci;
+    pc = ps + rici;
     pe = vec(A_global);
 
     vc = (pc - pc_prev)/delta_time;

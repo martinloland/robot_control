@@ -42,7 +42,6 @@ public:
 
 private:
     vector<Link*> links;
-    void update_T();
 };
 
 #endif // ROBOT_H

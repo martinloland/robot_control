@@ -25,6 +25,7 @@ public:
     vec ps;
     vec pc;
     vec vc;
+    void calculate_translation();
 
     string name;
     double q_start = 0;
@@ -80,7 +81,6 @@ private:
     vec hd;
 
     // Helper methods for newton euler
-    void calculate_translation();
     void calculate_rotation();
     void calculate_momentum();
     void calculate_force(vec force_from_next_link, int inc_dynamic_eff);
