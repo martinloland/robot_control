@@ -12,6 +12,12 @@ vec::vec(double x, double y, double z){
     this->z = z;
 }
 
+vec::vec(Transformation tran){
+    this->x = tran.T[0][3];
+    this->y = tran.T[1][3];
+    this->z = tran.T[2][3];
+}
+
 vec vec::operator -(const vec& b)
 {
     vec newVec;

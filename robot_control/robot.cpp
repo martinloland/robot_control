@@ -107,27 +107,27 @@ void Robot::set_theta_end(double theta, int link_index){
 void Robot::animate(double percentage){
     for (Link* n : links){
         n->animate(percentage);
-        n->update_dynamics();
     }
-    newtonEuler();
 }
 
 void Robot::newtonEuler(){
+    // Forward Newton Euler
+    for (Link* n : links){
+        n->newton_euler_forward();
+    }
+
     // Backward Newton Euler
     vec endEffectorLoad;
     vec endEffectorTorque;
     for (int i = links.size()-1; i >= 0; i--){
         if (i == (int)links.size()-1){
-            links.at(i)->calculate_force(endEffectorLoad);
-            links.at(i)->calculate_torque(endEffectorLoad,
-                                          endEffectorTorque);
+            links.at(i)->newton_euler_backward(endEffectorLoad,
+                                               endEffectorTorque);
         } else {
-            links.at(i)->calculate_force(links.at(i+1)->force);
-            links.at(i)->calculate_torque(links.at(i+1)->force,
-                                          links.at(i+1)->torque);
+            links.at(i)->newton_euler_backward(links.at(i+1)->force,
+                                               links.at(i+1)->torque);
         }
     }
-
     update_T();
 }
 

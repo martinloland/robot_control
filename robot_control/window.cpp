@@ -200,6 +200,8 @@ void window::update_variables(int link_index){
     ui->iyy->setText(QString::number(values["iyy"]));
     ui->iyz->setText(QString::number(values["iyz"]));
     ui->izz->setText(QString::number(values["izz"]));
+
+    cout << "x: " << values["pcx"] << "y: " << values["pcy"] << endl;
 }
 
 void window::on_btn_setWeight_clicked()

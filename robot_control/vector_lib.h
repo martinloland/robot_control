@@ -12,6 +12,7 @@ struct vec
     double z;
     vec();
     vec(double x, double y, double z);
+    vec(Transformation tran);
 
 
     vec cross(const vec& b);
