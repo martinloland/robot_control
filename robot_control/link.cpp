@@ -11,7 +11,7 @@ Link::Link(double a, double alpha, double d, double theta){
     _DHa = a;
     _DHalpha = alpha;
     _DHd = d;
-    _theta = theta;
+    _q = theta;
     update_A();
 }
 
@@ -20,21 +20,16 @@ void Link::print(){
 }
 
 void Link::update_A(){
-    A.change(_DHa, _DHalpha, _DHd, _theta);
+    A.change(_DHa, _DHalpha, _DHd, _q);
 }
 
 void Link::change_theta(double theta){
-    _theta = theta;
-    update_A();
-}
-
-void Link::move_theta(double d_theta){
-    _theta += d_theta;
+    _q = theta;
     update_A();
 }
 
 void Link::animate(double per){
-    double q = theta_start + (theta_end-theta_start)*(6*pow(per,5)-15*pow(per,4)+10*pow(per,3));
+    double q = q_start + (theta_end-q_start)*(6*pow(per,5)-15*pow(per,4)+10*pow(per,3));
     change_theta(q);
     update_A();
 }
@@ -44,7 +39,7 @@ map<string, double> Link::getLinkMap(){
     values["DHa"] = _DHa;
     values["DHalpha"] = _DHalpha;
     values["DHd"] = _DHd;
-    values["theta"] = _theta;
+    values["theta"] = _q;
     values["m"] = _m;
     values["ixx"] = _I.M[0][0];
     values["ixy"] = _I.M[0][1];
@@ -76,9 +71,9 @@ void Link::set_weight(double m,
 
 void Link::update_dynamics(){
     double delta_time = (double)(clock()-last_update)/1000.0;
-    _omega.z = (_theta - _theta_prev)/delta_time;
+    _omega.z = (_q - _q_prev)/delta_time;
     _alpha = (_omega - _omega_prev)/delta_time;
-    _theta_prev = _theta;
+    _q_prev = _q;
     _omega_prev = _omega;
     last_update = clock();
 }

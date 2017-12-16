@@ -66,13 +66,13 @@ void window::on_btn_add_default_clicked()
     Link* link1 = new Link(1.0, 0, 0, 1.4);
     Link* link2 = new Link(0.8, 0, 0, -2.0);
     Link* link3 = new Link(0.5, 0, 0, -1.92);
-    link1->theta_start = 1.4;
+    link1->q_start = 1.4;
     link1->theta_end = 0.17;
     link1->_m = 1.2;
-    link2->theta_start = -2.0;
+    link2->q_start = -2.0;
     link2->theta_end = 1.9;
     link2->_m = 0.8;
-    link3->theta_start = -1.92;
+    link3->q_start = -1.92;
     link3->theta_end = 1.0;
     link3->_m = 0.6;
 

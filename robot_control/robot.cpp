@@ -97,7 +97,7 @@ void Robot::change_theta(double theta, int link_index){
 }
 
 void Robot::set_theta_start(double theta, int link_index){
-    links.at(link_index)->theta_start = theta;
+    links.at(link_index)->q_start = theta;
 }
 
 void Robot::set_theta_end(double theta, int link_index){

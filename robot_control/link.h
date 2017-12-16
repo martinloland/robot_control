@@ -18,8 +18,7 @@ public:
     void print();
     string name;
     void change_theta(double theta);
-    void move_theta(double d_theta);
-    double theta_start = 0;
+    double q_start = 0;
     double theta_end = 0;
     void animate(double per);
     map<string, double> getLinkMap();
@@ -45,8 +44,8 @@ private:
     double _DHa;
     double _DHalpha;
     double _DHd;
-    double _theta;
-    double _theta_prev;
+    double _q;
+    double _q_prev;
     void update_A();
 
     // dynamic properties
