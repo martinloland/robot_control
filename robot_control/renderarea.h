@@ -18,9 +18,7 @@ class RenderArea : public QWidget
 public:
     explicit RenderArea(QWidget *parent = nullptr);
     void update_links(vector<double>& coords);
-    void update_joint_forces(vector<vec>& vectors);
-    void update_joint_torques(vector<vec>& vectors);
-    void update_link_velocities(vector<vec>& vectors);
+    void update_link_vectors(vector<vec>& vectors);
     int scale = 300;
     double scaling = 1.0/300.0;
     bool disp_force = 1;
@@ -38,13 +36,9 @@ protected:
     QPoint render_coord(double x, double y);
     coord2D real_coord(double x, double y);
     vector<double> robotLinks;
-    vector<vec> jointForces;
-    vector<vec> jointTorques;
-    vector<vec> linkVelocities;
+    vector<vec> link_vectors;
     void draw_links();
-    void draw_joint_forces();
-    void draw_joint_torques();
-    void draw_link_velocities();
+    void draw_link_vectors();
 
     int render_width;
     int render_height;

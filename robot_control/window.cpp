@@ -155,14 +155,8 @@ void window::update_robot(int inc_dynamic_eff){
     vector<double> coords = robot.get_coords();
     ui->renderArea->update_links(coords);
 
-    vector<vec> forces = robot.get_joint_forces();
-    ui->renderArea->update_joint_forces(forces);
-
-    vector<vec> torques = robot.get_joint_torques();
-    ui->renderArea->update_joint_torques(torques);
-
-    vector<vec> velocities = robot.get_link_velocities();
-    ui->renderArea->update_link_velocities(velocities);
+    vector<vec> vectors = robot.get_link_vectors();
+    ui->renderArea->update_link_vectors(vectors);
 
     ui->renderArea->repaint();
 

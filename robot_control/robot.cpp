@@ -48,34 +48,17 @@ vector<double> Robot::get_coords(){
     return coords;
 }
 
-vector<vec> Robot::get_joint_forces(){
-    vector<vec> force_vectors;
-
+vector<vec> Robot::get_link_vectors(){
+    vector<vec> vectors;
     for (int i = 0; i < links.size(); i++){
-        force_vectors.push_back(links.at(i)->ps);
-        force_vectors.push_back(links.at(i)->force);
+        vectors.push_back(links.at(i)->ps);
+        vectors.push_back(links.at(i)->pc);
+        vectors.push_back(links.at(i)->force);
+        vectors.push_back(links.at(i)->torque);
+        vectors.push_back(links.at(i)->vc);
+        vectors.push_back(links.at(i)->ac);
     }
-    return force_vectors;
-}
-
-vector<vec> Robot::get_joint_torques(){
-    vector<vec> torque_vectors;
-
-    for (int i = 0; i < links.size(); i++){
-        torque_vectors.push_back(links.at(i)->ps);
-        torque_vectors.push_back(links.at(i)->torque);
-    }
-    return torque_vectors;
-}
-
-vector<vec> Robot::get_link_velocities(){
-    vector<vec> link_velocities;
-
-    for (int i = 0; i < links.size(); i++){
-        link_velocities.push_back(links.at(i)->pc);
-        link_velocities.push_back(links.at(i)->vc);
-    }
-    return link_velocities;
+    return vectors;
 }
 
 void Robot::change_theta(double theta, int link_index){

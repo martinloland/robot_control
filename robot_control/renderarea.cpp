@@ -49,58 +49,29 @@ void RenderArea::paintEvent(QPaintEvent *e)
 {
     draw_axis();
     draw_links();
-    if (disp_force){
-        draw_joint_forces();
-    }
-    if (disp_torque){
-        draw_joint_torques();
-    }
-    if (disp_velocity){
-        draw_link_velocities();
-    }
+    draw_link_vectors();
+
 }
 
-void RenderArea::update_joint_forces(vector<vec>& vectors){
-    jointForces.clear();
+void RenderArea::update_link_vectors(vector<vec>& vectors){
+    link_vectors.clear();
     for (vec n : vectors){
-        jointForces.push_back(n);
+        link_vectors.push_back(n);
     }
 }
 
-void RenderArea::update_joint_torques(vector<vec>& vectors){
-    jointTorques.clear();
-    for (vec n : vectors){
-        jointTorques.push_back(n);
-    }
-}
-
-void RenderArea::update_link_velocities(vector<vec>& vectors){
-    linkVelocities.clear();
-    for (vec n : vectors){
-        linkVelocities.push_back(n);
-    }
-}
-
-void RenderArea::draw_joint_forces(){
-    if (jointForces.size() >= 2){
-        for (int i=0; i<=jointForces.size()-2; i+=2){
-            draw_arrow(jointForces.at(i), jointForces.at(i+1), Qt::green, 0.003);
-        }
-    }
-}
-
-void RenderArea::draw_joint_torques(){
-    if (jointTorques.size() >= 2){
-        for (int i=0; i<=jointTorques.size()-2; i+=2){
-            draw_circle(jointTorques.at(i), jointTorques.at(i+1), Qt::red, 0.01);
-        }
-    }
-}
-
-void RenderArea::draw_link_velocities(){
-    if (linkVelocities.size() >= 2){
-        for (int i=0; i<=linkVelocities.size()-2; i+=2){
-            draw_arrow(linkVelocities.at(i), linkVelocities.at(i+1), Qt::blue, 0.2);
+void RenderArea::draw_link_vectors(){
+    if (link_vectors.size() >= 6){
+        for (int i=0; i<=link_vectors.size()-6; i+=6){
+                if (disp_force){
+                    draw_arrow(link_vectors.at(i), link_vectors.at(i+2), Qt::green, 0.003);
+                }
+                if (disp_torque){
+                    draw_circle(link_vectors.at(i), link_vectors.at(i+3), Qt::red, 0.01);
+                }
+                if (disp_velocity){
+                    draw_arrow(link_vectors.at(i+1), link_vectors.at(i+4), Qt::blue, 0.2);
+                }
         }
     }
 }

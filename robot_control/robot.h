@@ -19,9 +19,7 @@ public:
     Transformation T;
     void print_coord();
     vector<double> get_coords();
-    vector<vec> get_joint_forces();
-    vector<vec> get_joint_torques();
-    vector<vec> get_link_velocities();
+    vector<vec> get_link_vectors();
 
     void change_theta(double theta, int link_index);
     void set_theta_start(double theta, int link_index);
@@ -29,12 +27,8 @@ public:
     void animate(double percentage);
     map<string, double> get_link_map(int link_index);
     void set_weight(double m,
-                    double ixx,
-                    double ixy,
-                    double ixz,
-                    double iyy,
-                    double iyz,
-                    double izz,
+                    double ixx, double ixy, double ixz,
+                    double iyy, double iyz, double izz,
                     int link_index);
     void print_link_global(int link_index);
     void newtonEuler(int inc_dynamic_eff);

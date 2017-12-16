@@ -496,11 +496,16 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
           <property name="inputMethodHints">
            <set>Qt::ImhNone</set>
           </property>
           <property name="text">
-           <string>8</string>
+           <string>4</string>
           </property>
           <property name="placeholderText">
            <string>[s]</string>

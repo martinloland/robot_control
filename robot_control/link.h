@@ -23,6 +23,7 @@ public:
     vec ps;
     vec pc;
     vec vc;
+    vec ac;
     void calculate_translation();
 
     string name;
@@ -76,7 +77,6 @@ private:
     vec vc_prev;
     vec ve;
     vec ve_prev;
-    vec ac;
     vec ae;
     // Linear and angular momentum
     vec pd;
