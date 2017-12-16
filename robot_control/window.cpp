@@ -118,7 +118,6 @@ void window::on_btn_setEnd_clicked()
         double theta = ui->for_theta->text().toDouble()*3.14159265359/180.0;
         robot.set_theta_end(theta, link_index);
     }
-
 }
 
 void window::on_animForward_clicked()
@@ -146,6 +145,10 @@ void window::start_animation(int forward){
         update_robot(ui->incDynEff->isChecked());
         Sleep(40);
         frames++;
+    }
+    for(int i=1; i <4; i++){
+        robot.animate(forward);
+        update_robot(ui->incDynEff->isChecked());
     }
     cout << "fps:" << (frames / (double)tot_anim_time) * 1000.0 << endl;
 }
@@ -237,4 +240,9 @@ void window::on_disp_tor_clicked(bool checked)
 void window::on_disp_vel_clicked(bool checked)
 {
     ui->renderArea->disp_velocity = checked;
+}
+
+void window::on_disp_acc_clicked(bool checked)
+{
+    ui->renderArea->disp_acceleration = checked;
 }

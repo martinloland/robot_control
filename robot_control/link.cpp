@@ -121,6 +121,8 @@ void Link::calculate_translation(){
 
     pc_prev = pc;
     pe_prev = pe;
+    vc_prev = vc;
+    ve_prev = ve;
 }
 
 void Link::calculate_force(vec f_j_link, int inc_dynamic_eff){

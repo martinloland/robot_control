@@ -24,6 +24,7 @@ public:
     bool disp_force = 1;
     bool disp_torque = 1;
     bool disp_velocity = 1;
+    bool disp_acceleration = 1;
 
 protected:
     void paintEvent(QPaintEvent *event) override;

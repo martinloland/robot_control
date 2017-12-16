@@ -64,13 +64,16 @@ void RenderArea::draw_link_vectors(){
     if (link_vectors.size() >= 6){
         for (int i=0; i<=link_vectors.size()-6; i+=6){
                 if (disp_force){
-                    draw_arrow(link_vectors.at(i), link_vectors.at(i+2), Qt::green, 0.003);
+                    draw_arrow(link_vectors.at(i), link_vectors.at(i+2), Qt::green, 0.005);
                 }
                 if (disp_torque){
                     draw_circle(link_vectors.at(i), link_vectors.at(i+3), Qt::red, 0.01);
                 }
                 if (disp_velocity){
-                    draw_arrow(link_vectors.at(i+1), link_vectors.at(i+4), Qt::blue, 0.2);
+                    draw_arrow(link_vectors.at(i+1), link_vectors.at(i+4), Qt::blue, 0.16);
+                }
+                if (disp_acceleration){
+                    draw_arrow(link_vectors.at(i+1), link_vectors.at(i+5), Qt::magenta, 0.05);
                 }
         }
     }

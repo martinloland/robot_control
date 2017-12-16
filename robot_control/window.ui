@@ -700,7 +700,7 @@
       <item>
        <widget class="QCheckBox" name="disp_for">
         <property name="text">
-         <string>Forces</string>
+         <string>Force</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -710,7 +710,7 @@
       <item>
        <widget class="QCheckBox" name="disp_tor">
         <property name="text">
-         <string>Torques</string>
+         <string>Torque</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -720,7 +720,17 @@
       <item>
        <widget class="QCheckBox" name="disp_vel">
         <property name="text">
-         <string>Linear velocities</string>
+         <string>Linear velocity</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="disp_acc">
+        <property name="text">
+         <string>Linear acceleration</string>
         </property>
         <property name="checked">
          <bool>true</bool>
