@@ -54,7 +54,7 @@ void window::on_btn_for_move_clicked()
     if (link_index >=0){
         robot.change_theta(theta, link_index);
     }
-    update_robot();
+    update_robot(0);
 }
 
 void window::on_ui_scale_valueChanged(int value)
@@ -92,7 +92,7 @@ void window::on_btn_add_default_clicked()
 
     vector<double> coords = robot.get_coords();
     ui->renderArea->update_links(coords);
-    update_robot();
+    update_robot(0);
 }
 
 void window::on_for_theta_sli_valueChanged(int value)
@@ -135,6 +135,7 @@ void window::start_animation(int forward){
     int tot_anim_time = ui->anim_time->text().toDouble()*1000;
     int start_time = clock();
     double anim_percent = 0.0;
+    double frames;
     while (clock()-start_time < tot_anim_time){
         if (forward){
             anim_percent = ((double)clock()-(double)start_time)/(double)tot_anim_time;
@@ -142,13 +143,15 @@ void window::start_animation(int forward){
             anim_percent = 1.0-((double)clock()-(double)start_time)/(double)tot_anim_time;
         }
         robot.animate(anim_percent);
-        update_robot();
-        Sleep(30);
+        update_robot(ui->incDynEff->isChecked());
+        Sleep(40);
+        frames++;
     }
+    cout << "fps:" << (frames / (double)tot_anim_time) * 1000.0 << endl;
 }
 
-void window::update_robot(){
-    robot.newtonEuler();
+void window::update_robot(int inc_dynamic_eff){
+    robot.newtonEuler(inc_dynamic_eff);
     vector<double> coords = robot.get_coords();
     ui->renderArea->update_links(coords);
 
@@ -203,8 +206,6 @@ void window::update_variables(int link_index){
     ui->iyy->setText(QString::number(values["iyy"]));
     ui->iyz->setText(QString::number(values["iyz"]));
     ui->izz->setText(QString::number(values["izz"]));
-
-    cout << "x: " << values["pcx"] << "y: " << values["pcy"] << endl;
 }
 
 void window::on_btn_setWeight_clicked()
@@ -221,5 +222,5 @@ void window::on_btn_setWeight_clicked()
                     ui->izz->text().toDouble(),
                     link_index);
     }
-    update_robot();
+    update_robot(0);
 }

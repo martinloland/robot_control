@@ -37,7 +37,7 @@ public:
                     double izz,
                     int link_index);
     void print_link_global(int link_index);
-    void newtonEuler();
+    void newtonEuler(int inc_dynamic_eff);
     int n_links = 0;
 
 private:

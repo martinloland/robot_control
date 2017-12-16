@@ -50,7 +50,7 @@ map<string, double> Link::getLinkMap(){
     values["iyz"] = I.M[1][2];
     values["izz"] = I.M[2][2];
 
-    values["force"] = force.y;
+    values["force"] = sqrt(pow(force.x,2)+pow(force.y,2));
     values["torque"] = torque.z;
     values["omega"] = q_d;
     values["alpha"] = q_dd;
@@ -62,14 +62,14 @@ map<string, double> Link::getLinkMap(){
     return values;
 }
 
-void Link::set_weight(double m,
+void Link::set_weight(double mass,
                 double ixx,
                 double ixy,
                 double ixz,
                 double iyy,
                 double iyz,
                 double izz){
-    m = m;
+    m = mass;
     I = {ixx, ixy, ixz,
          ixy, iyy, iyz,
          ixz, iyz, izz};
@@ -78,14 +78,14 @@ void Link::set_weight(double m,
 // NEWTON EULER FUNCTIONS START //
 
 void Link::newton_euler_forward(){
-    delta_time = (double)(clock()-last_update)/1000.0;
+    delta_time = (double)(clock()-last_update)/CLOCKS_PER_SEC;
     calculate_translation();
     calculate_rotation();
 }
 
-void Link::newton_euler_backward(vec f_j_link, vec t_j_link){
+void Link::newton_euler_backward(vec f_j_link, vec t_j_link, int inc_dynamic_eff){
     calculate_momentum();
-    calculate_force(f_j_link);
+    calculate_force(f_j_link, inc_dynamic_eff);
     calculate_torque(f_j_link, t_j_link);
 
     last_update = clock();
@@ -94,7 +94,6 @@ void Link::newton_euler_backward(vec f_j_link, vec t_j_link){
 void Link::calculate_momentum(){
     // rather change in momentum, therefore denoted d
     pd = ac*m;
-    pd.print();
 }
 
 void Link::calculate_rotation(){
@@ -126,8 +125,12 @@ void Link::calculate_translation(){
     pe_prev = pe;
 }
 
-void Link::calculate_force(vec f_j_link){
-    force = pd + f_j_link - g*m;
+void Link::calculate_force(vec f_j_link, int inc_dynamic_eff){
+    if (inc_dynamic_eff){
+        force = pd + f_j_link - g*m;
+    } else{
+        force = f_j_link - g*m;
+    }
 }
 
 void Link::calculate_torque(vec f_j_link, vec t_j_link){

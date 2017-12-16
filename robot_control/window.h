@@ -47,7 +47,7 @@ private:
     Ui::window *ui;
     void start_animation(int forward);
     void update_variables(int link_index);
-    void update_robot();
+    void update_robot(int inc_dynamic_eff);
     void update_table_text();
 };
 

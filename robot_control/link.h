@@ -36,13 +36,14 @@ public:
     void print();
 
     void newton_euler_forward();
-    void newton_euler_backward(vec f_j_link, vec t_j_link);
+    void newton_euler_backward(vec f_j_link, vec t_j_link, int inc_dynamic_eff);
+    vec pe;
 
 private:
     void update_A();
 
     // Time
-    int last_update = 0;
+    clock_t last_update = clock();
     double delta_time;
 
     // DH parameters
@@ -66,7 +67,6 @@ private:
     // Linear position, velocity and acceleration
     vec pc;
     vec pc_prev;
-    vec pe;
     vec pe_prev;
     vec vc;
     vec vc_prev;
@@ -82,7 +82,7 @@ private:
     void calculate_translation();
     void calculate_rotation();
     void calculate_momentum();
-    void calculate_force(vec force_from_next_link);
+    void calculate_force(vec force_from_next_link, int inc_dynamic_eff);
     void calculate_torque(vec force_from_next_link,
                           vec torque_from_next_link);
 };

@@ -75,7 +75,8 @@ vector<vec> Robot::get_joint_forces(){
     vector<vec> force_vectors;
 
     for (int i = 0; i < links.size(); i++){
-        force_vectors.push_back(joint_vector(i));
+//        force_vectors.push_back(joint_vector(i));
+        force_vectors.push_back(links.at(i)->pe);
         force_vectors.push_back(links.at(i)->force);
     }
     return force_vectors;
@@ -110,7 +111,7 @@ void Robot::animate(double percentage){
     }
 }
 
-void Robot::newtonEuler(){
+void Robot::newtonEuler(int inc_dynamic_eff){
     // Forward Newton Euler
     for (Link* n : links){
         n->newton_euler_forward();
@@ -122,10 +123,12 @@ void Robot::newtonEuler(){
     for (int i = links.size()-1; i >= 0; i--){
         if (i == (int)links.size()-1){
             links.at(i)->newton_euler_backward(endEffectorLoad,
-                                               endEffectorTorque);
+                                               endEffectorTorque,
+                                               inc_dynamic_eff);
         } else {
             links.at(i)->newton_euler_backward(links.at(i+1)->force,
-                                               links.at(i+1)->torque);
+                                               links.at(i+1)->torque,
+                                               inc_dynamic_eff);
         }
     }
     update_T();
