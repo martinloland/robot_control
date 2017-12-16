@@ -51,8 +51,8 @@ protected:
 private:
 
     void draw_line(double x1, double y1, double x2, double y2);
-    void draw_force(vec startVec, vec fVec);
-    void draw_torque(vec startVec, vec tVec);
+    void draw_arrow(vec startVec, vec fVec, QColor color, double scale);
+    void draw_circle(vec startVec, vec tVec, QColor color, double scale);
     QBrush brush;
 
     QPoint m_lastPos;
