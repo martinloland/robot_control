@@ -5,7 +5,6 @@ using namespace std;
 
 Robot::Robot()
 {
-
 }
 
 void Robot::print(){
@@ -102,16 +101,10 @@ void Robot::newtonEuler(int inc_dynamic_eff){
     // Forward Newton Euler
 
     T.identity();
-    vec prev_link;
     for (Link* n : links){
-        n->newton_euler_forward();
         T *= n->A;
         n->A_global = T;
-        n->ps = prev_link;
-        n->calculate_translation();
-        prev_link.x = T.T[0][3];
-        prev_link.y = T.T[1][3];
-        prev_link.z = T.T[2][3];
+        n->newton_euler_forward();
     }
 
     // Backward Newton Euler

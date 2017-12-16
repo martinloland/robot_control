@@ -20,8 +20,6 @@ public:
     Transformation A_global;
     vec force;
     vec torque;
-    vec rici;
-    vec rjci;
     vec ps;
     vec pc;
     vec vc;
@@ -61,12 +59,16 @@ private:
     double q_d_prev;
     double q_dd;
     inertia I;
+    vec rici_loc;
+    vec rjci_loc;
 
     // Global values
     vec omega;
     vec omega_prev;
     vec alpha;
     vec g;
+    vec rici;
+    vec rjci;
     // Linear position, velocity and acceleration
     vec pc_prev;
     vec pe;

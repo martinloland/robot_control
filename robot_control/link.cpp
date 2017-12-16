@@ -23,6 +23,8 @@ void Link::print(){
 
 void Link::update_A(){
     A.change(DHa, DHalpha, DHd, q);
+    rici_loc.x = DHa/2.0;
+    rjci_loc.x = -DHa/2.0;
 }
 
 void Link::change_theta(double theta){
@@ -57,8 +59,6 @@ map<string, double> Link::getLinkMap(){
     values["pcx"] = pc.x;
     values["pcy"] = pc.y;
 
-    //values["pd"] = sqrt(pow(pd.x,2)+pow(pd.y,2));
-
     return values;
 }
 
@@ -79,7 +79,7 @@ void Link::set_weight(double mass,
 
 void Link::newton_euler_forward(){
     delta_time = (double)(clock()-last_update)/CLOCKS_PER_SEC;
-//    calculate_translation();
+    calculate_translation();
     calculate_rotation();
 }
 
@@ -87,7 +87,6 @@ void Link::newton_euler_backward(vec f_j_link, vec t_j_link, int inc_dynamic_eff
     calculate_momentum();
     calculate_force(f_j_link, inc_dynamic_eff);
     calculate_torque(f_j_link, t_j_link);
-
     last_update = clock();
 }
 
@@ -108,13 +107,12 @@ void Link::calculate_rotation(){
 }
 
 void Link::calculate_translation(){
-    vec re(DHa/2.0, 0.0, 0.0);
-    vec rf(-DHa/2.0, 0.0, 0.0);
     rotMat R(A_global);
-    rici = R*re;
-    rjci = R*rf;
-    pc = ps + rici;
+    rici = R*rici_loc;
+    rjci = R*rjci_loc;
     pe = vec(A_global);
+    pc = pe + rjci;
+    ps = pe + rjci*2;
 
     vc = (pc - pc_prev)/delta_time;
     ve = (pe - pe_prev)/delta_time;
