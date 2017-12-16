@@ -49,9 +49,15 @@ void RenderArea::paintEvent(QPaintEvent *e)
 {
     draw_axis();
     draw_links();
-    draw_joint_forces();
-    draw_joint_torques();
-    draw_link_velocities();
+    if (disp_force){
+        draw_joint_forces();
+    }
+    if (disp_torque){
+        draw_joint_torques();
+    }
+    if (disp_velocity){
+        draw_link_velocities();
+    }
 }
 
 void RenderArea::update_joint_forces(vector<vec>& vectors){

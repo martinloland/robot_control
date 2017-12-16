@@ -23,6 +23,9 @@ public:
     void update_link_velocities(vector<vec>& vectors);
     int scale = 300;
     double scaling = 1.0/300.0;
+    bool disp_force = 1;
+    bool disp_torque = 1;
+    bool disp_velocity = 1;
 
 protected:
     void paintEvent(QPaintEvent *event) override;

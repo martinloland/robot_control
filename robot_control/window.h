@@ -43,6 +43,12 @@ private slots:
 
     void on_btn_setWeight_clicked();
 
+    void on_disp_for_clicked(bool checked);
+
+    void on_disp_tor_clicked(bool checked);
+
+    void on_disp_vel_clicked(bool checked);
+
 private:
     Ui::window *ui;
     void start_animation(int forward);

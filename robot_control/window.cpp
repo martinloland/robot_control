@@ -229,3 +229,18 @@ void window::on_btn_setWeight_clicked()
     }
     update_robot(0);
 }
+
+void window::on_disp_for_clicked(bool checked)
+{
+    ui->renderArea->disp_force = checked;
+}
+
+void window::on_disp_tor_clicked(bool checked)
+{
+    ui->renderArea->disp_torque = checked;
+}
+
+void window::on_disp_vel_clicked(bool checked)
+{
+    ui->renderArea->disp_velocity = checked;
+}
