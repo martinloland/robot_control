@@ -67,14 +67,14 @@ void window::on_btn_add_default_clicked()
     Link* link2 = new Link(0.8, 0, 0, -2.0);
     Link* link3 = new Link(0.5, 0, 0, -1.92);
     link1->q_start = 1.4;
-    link1->theta_end = 0.17;
-    link1->_m = 1.2;
+    link1->q_end = 0.17;
+    link1->m = 1.2;
     link2->q_start = -2.0;
-    link2->theta_end = 1.9;
-    link2->_m = 0.8;
+    link2->q_end = 1.9;
+    link2->m = 0.8;
     link3->q_start = -1.92;
-    link3->theta_end = 1.0;
-    link3->_m = 0.6;
+    link3->q_end = 1.0;
+    link3->m = 0.6;
 
     robot.addLink(link1);
     QString qstr = QString::fromStdString(link1->name);

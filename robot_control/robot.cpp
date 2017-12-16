@@ -101,7 +101,7 @@ void Robot::set_theta_start(double theta, int link_index){
 }
 
 void Robot::set_theta_end(double theta, int link_index){
-    links.at(link_index)->theta_end = theta;
+    links.at(link_index)->q_end = theta;
 }
 
 void Robot::animate(double percentage){

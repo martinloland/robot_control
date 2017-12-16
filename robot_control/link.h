@@ -15,51 +15,49 @@ public:
     Transformation A_global;
     Link();
     Link(double a, double alpha, double d, double theta);
-    void print();
+
     string name;
-    void change_theta(double theta);
-    double q_start = 0;
-    double theta_end = 0;
-    void animate(double per);
-    map<string, double> getLinkMap();
-    void set_weight(double m,
-                    double ixx,
-                    double ixy,
-                    double ixz,
-                    double iyy,
-                    double iyz,
-                    double izz);
-    void update_dynamics();
     vec force;
     vec torque;
+    vec rici;
+    vec rjci;
+    double q_start = 0;
+    double q_end = 0;
+    double m = 0.8;
+
+    map<string, double> getLinkMap();
+    void change_theta(double theta);
+    void animate(double per);
+    void set_weight(double m,
+                    double ixx, double ixy, double ixz,
+                    double iyy, double iyz, double izz);
+    void update_dynamics();
     void calculate_force(vec force_from_next_link);
     void calculate_torque(vec force_from_next_link,
                           vec torque_from_next_link);
-    vec rici;
-    vec rjci;
-    double _m = 0.8;
+    void print();
 
 private:
-    // DH parameters
-    double _DHa;
-    double _DHalpha;
-    double _DHd;
-    double _q;
-    double _q_prev;
     void update_A();
+
+    // DH parameters
+    double DHa;
+    double DHalpha;
+    double DHd;
+    double q;
+    double q_prev;
 
     // dynamic properties
     int last_update = 0;
-    vec _omega;
-    vec _omega_prev;
-    vec _alpha;
-    vec _ae;
-    vec _ac;
-    inertia _I;
+    vec omega;
+    vec omega_prev;
+    vec alpha;
+    vec ae;
+    vec ac;
+    inertia I;
 
     // geometry
     void calculate_geometry();
-
 };
 
 
