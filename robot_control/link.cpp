@@ -58,6 +58,8 @@ map<string, double> Link::getLinkMap(){
     values["alpha"] = q_dd;
     values["pcx"] = pc.x;
     values["pcy"] = pc.y;
+    values["vc"] = sqrt(pow(vc.x,2)+pow(vc.y,2));;
+    values["ac"] = sqrt(pow(ac.x,2)+pow(ac.y,2));;
 
     return values;
 }

@@ -136,13 +136,22 @@ void window::start_animation(int forward){
     int start_time = clock();
     double anim_percent = 0.0;
     double frames;
-    // For writing values to file, uncomment
-//    sprintf(filename, "../output/%d.csv",tot_anim_time);
-//    myfile.open (filename);
-//    myfile << "total time: " << tot_anim_time << " ms\n";
-//    myfile << "per,q,qd,qdd,f,t\n";
-//    ofstream myfile;
-//    char filename[100];
+    ofstream myfile;
+    char buf[256];
+
+    if (exportData){
+        char filename[100];
+        sprintf(filename,"%s",ui->exportPath->text().toUtf8().constData());
+        cout << filename << endl;
+        myfile.open (filename);
+        myfile << "total time: " << tot_anim_time << " ms\n";
+        myfile << "per";
+        for (int i = 0; i < robot.n_links; i++){
+            sprintf(buf,",q%d,qd%d,qdd%d,f%d,t%d,v%d,a%d",i+1,i+1,i+1,i+1,i+1,i+1,i+1);
+            myfile << buf;
+        }
+        myfile << "\n";
+    }
 
     while (clock()-start_time < tot_anim_time){
         if (forward){
@@ -153,12 +162,15 @@ void window::start_animation(int forward){
         robot.animate(anim_percent);
         update_robot(ui->incDynEff->isChecked());
         Sleep(40);
-
-//        map<string, double> val = robot.get_link_map(0);
-//        sprintf(buf, "%f,%f,%f,%f,%f,%f\n",anim_percent,val["theta"],
-//                val["omega"],val["alpha"],val["force"],val["torque"]);
-//        myfile << buf;
-
+        if (exportData){
+            myfile << anim_percent;
+            for (int i = 0; i < robot.n_links; i++){
+                map<string, double> val = robot.get_link_map(0);
+                sprintf(buf, ",%f,%f,%f,%f,%f,%f,%f",val["theta"],val["omega"],val["alpha"],val["force"],val["torque"],val["vc"],val["ac"]);
+                myfile << buf;
+            }
+            myfile << "\n";
+        }
         frames++;
     }
     // smooth out
@@ -166,7 +178,10 @@ void window::start_animation(int forward){
         robot.animate(forward);
         update_robot(ui->incDynEff->isChecked());
     }
-//    myfile.close();
+    if (exportData){
+        myfile.close();
+    }
+
     cout << "fps:" << (frames / (double)tot_anim_time) * 1000.0 << endl;
 }
 
@@ -259,4 +274,9 @@ void window::on_disp_vel_clicked(bool checked)
 void window::on_disp_acc_clicked(bool checked)
 {
     ui->renderArea->disp_acceleration = checked;
+}
+
+void window::on_checkBox_clicked(bool checked)
+{
+    exportData = checked;
 }

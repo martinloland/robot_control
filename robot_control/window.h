@@ -51,12 +51,15 @@ private slots:
 
     void on_disp_acc_clicked(bool checked);
 
+    void on_checkBox_clicked(bool checked);
+
 private:
     Ui::window *ui;
     void start_animation(int forward);
     void update_variables(int link_index);
     void update_robot(int inc_dynamic_eff);
     void update_table_text();
+    bool exportData = 0;
 
 };
 

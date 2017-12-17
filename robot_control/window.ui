@@ -685,6 +685,29 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="checkBox">
+        <property name="text">
+         <string>Export data</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="exportPath">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>../export.csv</string>
+        </property>
+        <property name="placeholderText">
+         <string>Output path</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_16">
         <property name="font">
          <font>
