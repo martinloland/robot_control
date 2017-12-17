@@ -132,17 +132,17 @@ void window::on_animBack_clicked()
 }
 
 void window::start_animation(int forward){
-    ofstream myfile;
-    char buf[256];
-    char filename[100];
     int tot_anim_time = ui->anim_time->text().toDouble()*1000;
     int start_time = clock();
     double anim_percent = 0.0;
-    double frames;    
-    sprintf(filename, "../output/%d.csv",tot_anim_time);
-    myfile.open (filename);
+    double frames;
+    // For writing values to file, uncomment
+//    sprintf(filename, "../output/%d.csv",tot_anim_time);
+//    myfile.open (filename);
 //    myfile << "total time: " << tot_anim_time << " ms\n";
-    myfile << "per,q,qd,qdd,f,t\n";
+//    myfile << "per,q,qd,qdd,f,t\n";
+//    ofstream myfile;
+//    char filename[100];
 
     while (clock()-start_time < tot_anim_time){
         if (forward){
@@ -152,12 +152,12 @@ void window::start_animation(int forward){
         }
         robot.animate(anim_percent);
         update_robot(ui->incDynEff->isChecked());
-        Sleep(20);
+        Sleep(40);
 
-        map<string, double> val = robot.get_link_map(0);
-        sprintf(buf, "%f,%f,%f,%f,%f,%f\n",anim_percent,val["theta"],
-                val["omega"],val["alpha"],val["force"],val["torque"]);
-        myfile << buf;
+//        map<string, double> val = robot.get_link_map(0);
+//        sprintf(buf, "%f,%f,%f,%f,%f,%f\n",anim_percent,val["theta"],
+//                val["omega"],val["alpha"],val["force"],val["torque"]);
+//        myfile << buf;
 
         frames++;
     }
@@ -166,7 +166,7 @@ void window::start_animation(int forward){
         robot.animate(forward);
         update_robot(ui->incDynEff->isChecked());
     }
-    myfile.close();
+//    myfile.close();
     cout << "fps:" << (frames / (double)tot_anim_time) * 1000.0 << endl;
 }
 
@@ -174,12 +174,9 @@ void window::update_robot(int inc_dynamic_eff){
     robot.newtonEuler(inc_dynamic_eff);
     vector<double> coords = robot.get_coords();
     ui->renderArea->update_links(coords);
-
     vector<vec> vectors = robot.get_link_vectors();
     ui->renderArea->update_link_vectors(vectors);
-
     ui->renderArea->repaint();
-
     update_table_text();
 }
 
