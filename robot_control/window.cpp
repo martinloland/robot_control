@@ -132,8 +132,9 @@ void window::on_animBack_clicked()
 }
 
 void window::start_animation(int forward){
-    int tot_anim_time = ui->anim_time->text().toDouble()*1000;
+    double tot_anim_time = ui->anim_time->text().toDouble()*1000.0;
     int start_time = clock();
+    int last_step = 0;
     double anim_percent = 0.0;
     double frames;
     ofstream myfile;
@@ -154,24 +155,26 @@ void window::start_animation(int forward){
     }
 
     while (clock()-start_time < tot_anim_time){
-        if (forward){
-            anim_percent = ((double)clock()-(double)start_time)/(double)tot_anim_time;
-        }else{
-            anim_percent = 1.0-((double)clock()-(double)start_time)/(double)tot_anim_time;
-        }
-        robot.animate(anim_percent);
-        update_robot(ui->incDynEff->isChecked());
-        Sleep(40);
-        if (exportData){
-            myfile << anim_percent;
-            for (int i = 0; i < robot.n_links; i++){
-                map<string, double> val = robot.get_link_map(0);
-                sprintf(buf, ",%f,%f,%f,%f,%f,%f,%f",val["theta"],val["omega"],val["alpha"],val["force"],val["torque"],val["vc"],val["ac"]);
-                myfile << buf;
+        if (clock() - last_step > 25){ // Aprox constant fps
+            if (forward){
+                anim_percent = ((double)clock()-(double)start_time)/tot_anim_time;
+            }else{
+                anim_percent = 1.0-((double)clock()-(double)start_time)/tot_anim_time;
             }
-            myfile << "\n";
+            robot.animate(anim_percent);
+            update_robot(ui->incDynEff->isChecked());
+            if (exportData){
+                myfile << anim_percent;
+                for (int i = 0; i < robot.n_links; i++){
+                    map<string, double> val = robot.get_link_map(i);
+                    sprintf(buf, ",%f,%f,%f,%f,%f,%f,%f",val["theta"],val["omega"],val["alpha"],val["force"],val["torque"],val["vc"],val["ac"]);
+                    myfile << buf;
+                }
+                myfile << "\n";
+            }
+            frames+=1.0;
+            last_step = clock();
         }
-        frames++;
     }
     // smooth out
     for(int i=1; i <4; i++){
@@ -181,8 +184,7 @@ void window::start_animation(int forward){
     if (exportData){
         myfile.close();
     }
-
-    cout << "fps:" << (frames / (double)tot_anim_time) * 1000.0 << endl;
+//    cout << "fps:" << (frames / tot_anim_time) * 1000.0 << endl;
 }
 
 void window::update_robot(int inc_dynamic_eff){
@@ -204,7 +206,7 @@ void window::on_links_list_clicked(const QModelIndex &index)
 void window::update_table_text(){
     char buf[256];
     ui->table->clear();
-    sprintf(buf, "%-6s %-9s %-9s %-9s %-9s %-9s",
+    sprintf(buf, "%-6s %-8s %-8s %-8s %-8s %-8s",
             "Link", "Force", "Torque", "Theta", "Velocity", "Accel.");
     ui->table->append(QString(buf));
 
@@ -212,12 +214,12 @@ void window::update_table_text(){
     for (int i = 0; i < robot.n_links; i++){
         map<string, double> val;
         val = robot.get_link_map(i);
-        sprintf(buf, "%-6d %9.2f %9.2f %9.2f %9.2f %9.2f",
+        sprintf(buf, "%-6d %8.2f %8.2f %8.2f %8.2f %8.2f",
                 i+1, val["force"], val["torque"],
                 val["theta"], val["omega"], val["alpha"]);
         ui->table->append(QString(buf));
     }
-    sprintf(buf, "%-6s %-9s %-9s %-9s %-9s %-9s",
+    sprintf(buf, "%-6s %-8s %-8s %-8s %-8s %-8s",
             "#", "N", "Nm", "rad", "rad/s", "rad/s^2");
     ui->table->append(QString(buf));
 }
