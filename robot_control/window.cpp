@@ -193,6 +193,8 @@ void window::update_robot(int inc_dynamic_eff){
     ui->renderArea->update_links(coords);
     vector<vec> vectors = robot.get_link_vectors();
     ui->renderArea->update_link_vectors(vectors);
+    vector<vec> endeffvec = robot.get_end_eff_vectors();
+    ui->renderArea->update_end_eff_vectors(endeffvec);
     ui->renderArea->repaint();
     update_table_text();
 }
@@ -281,4 +283,15 @@ void window::on_disp_acc_clicked(bool checked)
 void window::on_checkBox_clicked(bool checked)
 {
     exportData = checked;
+}
+
+void window::on_set_end_eff_load_clicked()
+{
+    robot.set_end_effector_load(-ui->efx->text().toDouble(),
+                                -ui->efy->text().toDouble(),
+                                -ui->efz->text().toDouble(),
+                                -ui->etx->text().toDouble(),
+                                -ui->ety->text().toDouble(),
+                                -ui->etz->text().toDouble());
+    update_robot(0);
 }

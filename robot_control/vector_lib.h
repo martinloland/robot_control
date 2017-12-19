@@ -24,11 +24,13 @@ struct vec
     void print(){
      cout << "[" << x << ", " << y << ", " << z << "]" << endl;
     }
+    vec neg();
 };
 
 struct inertia
 {
      double M[3][3] = {0};
+     vec operator *(const vec& b);
 };
 
 struct rotMat

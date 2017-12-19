@@ -20,6 +20,7 @@ public:
     Transformation A_global;
     vec force;
     vec torque;
+    vec alpha;
     vec ps;
     vec pc;
     vec vc;
@@ -38,7 +39,7 @@ public:
                     double iyy, double iyz, double izz);
     void print();
 
-    void newton_euler_forward();
+    void newton_euler_forward(vec alpha_h_link);
     void newton_euler_backward(vec f_j_link, vec t_j_link, int inc_dynamic_eff);
 
 private:
@@ -66,7 +67,6 @@ private:
     // Global values
     vec omega;
     vec omega_prev;
-    vec alpha;
     vec g;
     vec rici;
     vec rjci;
@@ -83,11 +83,11 @@ private:
     vec hd;
 
     // Helper methods for newton euler
-    void calculate_rotation();
+    void calculate_rotation(vec alpha_h_link);
     void calculate_momentum();
     void calculate_force(vec force_from_next_link, int inc_dynamic_eff);
     void calculate_torque(vec force_from_next_link,
-                          vec torque_from_next_link);
+                          vec torque_from_next_link, int inc_dynamic_eff);
 };
 
 

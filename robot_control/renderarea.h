@@ -19,6 +19,7 @@ public:
     explicit RenderArea(QWidget *parent = nullptr);
     void update_links(vector<double>& coords);
     void update_link_vectors(vector<vec>& vectors);
+    void update_end_eff_vectors(vector<vec>& vectors);
     int scale = 300;
     double scaling = 1.0/300.0;
     bool disp_force = 1;
@@ -38,8 +39,10 @@ protected:
     coord2D real_coord(double x, double y);
     vector<double> robotLinks;
     vector<vec> link_vectors;
+    vector<vec> end_eff_vectors;
     void draw_links();
     void draw_link_vectors();
+    void draw_end_effector();
 
     int render_width;
     int render_height;

@@ -79,32 +79,34 @@ void Link::set_weight(double mass,
 
 // NEWTON EULER FUNCTIONS START //
 
-void Link::newton_euler_forward(){
+void Link::newton_euler_forward(vec alpha_h_link){
     delta_time = (double)(clock()-last_update)/CLOCKS_PER_SEC;
     calculate_translation();
-    calculate_rotation();
+    calculate_rotation(alpha_h_link);
 }
 
 void Link::newton_euler_backward(vec f_j_link, vec t_j_link, int inc_dynamic_eff){
     calculate_momentum();
     calculate_force(f_j_link, inc_dynamic_eff);
-    calculate_torque(f_j_link, t_j_link);
+    calculate_torque(f_j_link, t_j_link, inc_dynamic_eff);
     last_update = clock();
 }
 
 void Link::calculate_momentum(){
     // rather change in momentum, therefore denoted d
-    pd = ac*m;
+    pd = ac*m; //(4.19)
+    hd = I*alpha; //(4.20) Not finished
 }
 
-void Link::calculate_rotation(){
+void Link::calculate_rotation(vec alpha_h_link){
     // Joint varaibles
-    q_d = (q - q_prev)/delta_time;
+    q_d = (q - q_prev)/delta_time; // (5.1)
     q_dd = (q_d - q_d_prev)/delta_time;
     q_prev = q;
     q_d_prev = q_d;
 
     // Global variables
+    alpha = alpha_h_link + vec(0,0,q_dd);
 
 }
 
@@ -116,10 +118,10 @@ void Link::calculate_translation(){
     pc = pe + rjci;
     ps = pe + rjci*2;
 
-    vc = (pc - pc_prev)/delta_time;
-    ve = (pe - pe_prev)/delta_time;
-    ac = (vc - vc_prev)/delta_time;
-    ae = (ve - ve_prev)/delta_time;
+    vc = (pc - pc_prev)/delta_time;  // (4.15)
+    ve = (pe - pe_prev)/delta_time;  // (4.15)
+    ac = (vc - vc_prev)/delta_time;  // (4.16)
+    ae = (ve - ve_prev)/delta_time;  // (4.16)
 
     pc_prev = pc;
     pe_prev = pe;
@@ -129,13 +131,18 @@ void Link::calculate_translation(){
 
 void Link::calculate_force(vec f_j_link, int inc_dynamic_eff){
     if (inc_dynamic_eff){
-        force = pd + f_j_link - g*m;
+        force = pd + f_j_link - g*m; // (4.25)
     } else{
-        force = f_j_link - g*m;
+        force = f_j_link - g*m; // (4.25)
     }
 }
 
-void Link::calculate_torque(vec f_j_link, vec t_j_link){
-    torque = t_j_link - force.cross(rici) +
-            f_j_link.cross(rjci);
+void Link::calculate_torque(vec f_j_link, vec t_j_link, int inc_dynamic_eff){
+    if (inc_dynamic_eff){
+        torque = hd + t_j_link - force.cross(rici) +
+                f_j_link.cross(rjci); // (4.26)
+    } else{
+        torque = t_j_link - force.cross(rici) +
+                f_j_link.cross(rjci); // (4.26)
+    }
 }

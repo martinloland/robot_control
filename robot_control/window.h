@@ -53,6 +53,8 @@ private slots:
 
     void on_checkBox_clicked(bool checked);
 
+    void on_set_end_eff_load_clicked();
+
 private:
     Ui::window *ui;
     void start_animation(int forward);

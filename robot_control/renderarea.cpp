@@ -50,13 +50,20 @@ void RenderArea::paintEvent(QPaintEvent *e)
     draw_axis();
     draw_links();
     draw_link_vectors();
-
+    draw_end_effector();
 }
 
 void RenderArea::update_link_vectors(vector<vec>& vectors){
     link_vectors.clear();
     for (vec n : vectors){
         link_vectors.push_back(n);
+    }
+}
+
+void RenderArea::update_end_eff_vectors(vector<vec>& vectors){
+    end_eff_vectors.clear();
+    for (vec n : vectors){
+        end_eff_vectors.push_back(n);
     }
 }
 
@@ -76,6 +83,13 @@ void RenderArea::draw_link_vectors(){
                     draw_arrow(link_vectors.at(i+1), link_vectors.at(i+5), Qt::magenta, 0.05);
                 }
         }
+    }
+}
+
+void RenderArea::draw_end_effector(){
+    if (end_eff_vectors.size() >= 3){
+        draw_arrow(end_eff_vectors.at(0), end_eff_vectors.at(1).neg(), Qt::yellow, 0.05);
+        draw_circle(end_eff_vectors.at(0), end_eff_vectors.at(2).neg(), Qt::yellow, 0.05);
     }
 }
 

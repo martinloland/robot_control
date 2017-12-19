@@ -105,3 +105,18 @@ void rotMat::print(){
     }
 }
 
+vec vec::neg(){
+    vec newVec;
+    newVec.x = this->x*(-1.0);
+    newVec.y = this->y*(-1.0);
+    newVec.z = this->z*(-1.0);
+    return newVec;
+}
+
+vec inertia::operator *(const vec& b){
+    vec newVec;
+    newVec.x = this->M[0][0]*b.x + this->M[0][1]*b.y + this->M[0][2]*b.z;
+    newVec.y = this->M[1][0]*b.x + this->M[1][1]*b.y + this->M[1][2]*b.z;
+    newVec.z = this->M[2][0]*b.x + this->M[2][1]*b.y + this->M[2][2]*b.z;
+    return newVec;
+}

@@ -61,6 +61,16 @@ vector<vec> Robot::get_link_vectors(){
     return vectors;
 }
 
+
+vector<vec> Robot::get_end_eff_vectors(){
+    vector<vec> vectors;
+    vec pos_end_eff = vec(T);
+    vectors.push_back(pos_end_eff);
+    vectors.push_back(endEffectorLoad);
+    vectors.push_back(endEffectorTorque);
+    return vectors;
+}
+
 void Robot::change_theta(double theta, int link_index){
     links.at(link_index)->change_theta(theta);
     newtonEuler(0);
@@ -82,17 +92,16 @@ void Robot::animate(double percentage){
 
 void Robot::newtonEuler(int inc_dynamic_eff){
     // Forward Newton Euler
-
+    vec alpha_h_link(0.0, 0.0, 0.0);
     T.identity();
     for (Link* n : links){
         T *= n->A;
         n->A_global = T;
-        n->newton_euler_forward();
+        n->newton_euler_forward(alpha_h_link);
+        alpha_h_link = n->alpha;
     }
 
     // Backward Newton Euler
-    vec endEffectorLoad;
-    vec endEffectorTorque;
     for (int i = links.size()-1; i >= 0; i--){
         if (i == (int)links.size()-1){
             links.at(i)->newton_euler_backward(endEffectorLoad,
@@ -108,6 +117,18 @@ void Robot::newtonEuler(int inc_dynamic_eff){
 
 map<string, double> Robot::get_link_map(int link_index){
     return links.at(link_index)->getLinkMap();
+}
+
+
+void Robot::set_end_effector_load(double efx, double efy, double efz,
+                          double etx, double ety, double etz){
+    endEffectorLoad.x = efx;
+    endEffectorLoad.y = efy;
+    endEffectorLoad.z = efz;
+
+    endEffectorTorque.x = etx;
+    endEffectorTorque.y = ety;
+    endEffectorTorque.z = etz;
 }
 
 void Robot::set_weight(double m,

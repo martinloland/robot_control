@@ -20,6 +20,7 @@ public:
     void print_coord();
     vector<double> get_coords();
     vector<vec> get_link_vectors();
+    vector<vec> get_end_eff_vectors();
 
     void change_theta(double theta, int link_index);
     void set_theta_start(double theta, int link_index);
@@ -32,10 +33,14 @@ public:
                     int link_index);
     void print_link_global(int link_index);
     void newtonEuler(int inc_dynamic_eff);
+    void set_end_effector_load(double efx, double efy, double efz,
+                              double etx, double ety, double etz);
     int n_links = 0;
 
 private:
     vector<Link*> links;
+    vec endEffectorLoad;
+    vec endEffectorTorque;
 };
 
 #endif // ROBOT_H
